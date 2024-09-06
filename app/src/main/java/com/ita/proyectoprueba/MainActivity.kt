@@ -1,9 +1,11 @@
 package com.ita.proyectoprueba
 
+import android.graphics.Picture
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -13,6 +15,7 @@ import androidx.compose.foundation.layout.Column
 //import androidx.compose.foundation.layout.FlowRowScopeInstance.weight
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Scaffold
@@ -20,9 +23,18 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.ita.proyectoprueba.ui.theme.ProyectoPruebaTheme
 
 class MainActivity : ComponentActivity() {
@@ -37,9 +49,8 @@ class MainActivity : ComponentActivity() {
                 horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally
 
             ){
-                Text(text = "Simple Text")
-                ModifierExample()
-                ModifierExample2()
+                CustomText()
+                Picture()
             }
         }
             //Layouts
@@ -92,7 +103,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     )
 }
 
-@Preview(showBackground = true)
+/*@Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     ProyectoPruebaTheme {
@@ -135,7 +146,7 @@ fun ModifierExample3(){
         .fillMaxSize()
         .padding(16.dp)
         .background(Color.Cyan)
-        .border(width = 2.dp,color = Color.Red)
+        .border(width = 2.dp, color = Color.Red)
         .width(200.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceEvenly
@@ -147,4 +158,52 @@ fun ModifierExample3(){
         Text(text = "Team 5")
     }
 
+}*/
+@Preview(showBackground = true)
+@Composable
+fun CustomText() {
+    Column {
+        Text(
+            stringResource(R.string.hello_world_text),
+            color = colorResource(R.color.purple_200),
+            fontSize = 20.sp,
+            fontStyle = FontStyle.Italic,
+            fontWeight = FontWeight.ExtraBold,
+
+            )
+        val gradientColors = listOf(Color.Cyan, Color.Blue, Color.Red)
+        Text(
+            stringResource(R.string.hello_world_text),
+            style = TextStyle(brush = Brush.linearGradient(colors = gradientColors))
+        )
+
+    }
 }
+
+    @Preview(showBackground = true)
+    @Composable
+    fun Picture(){
+        Column (
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.Black)
+
+            ){
+                Image(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    painter = painterResource(R.drawable.android),
+                    contentDescription ="Logo Android",
+                    contentScale = ContentScale.Crop
+                )
+
+
+        }
+
+    fun  clickAction() {
+        println("Column Clicked")
+    }
+
+
+    }
+
