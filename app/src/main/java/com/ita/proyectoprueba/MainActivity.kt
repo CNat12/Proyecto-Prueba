@@ -16,8 +16,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Card
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -32,27 +36,44 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ita.proyectoprueba.ui.theme.ProyectoPruebaTheme
 
+
 class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) { //cuando entra por primera vez y aqui se pone el contenido
+    override fun onCreate (savedInstanceState: Bundle?) { //cuando entra por primera vez y aqui se pone el contenido
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        //enableEdgeToEdge()
         setContent {
+            /*Box {
+                Text(text = "Label 1")
+                Text(text = "Label 2")
+            }
+            Greeting(name = "World")
+        }*/
 
             Column(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .fillMaxSize()
+                    .verticalScroll(rememberScrollState()),
+
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally
 
-            ){
+            ) {
                 CustomText()
                 Picture()
+                Content1()
+                Content2()
             }
         }
+    }
+}
+
             //Layouts
             /*Column {
                 Text(text = "First Row")
@@ -92,8 +113,7 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }*/
-    }
-}
+
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
@@ -179,31 +199,111 @@ fun CustomText() {
 
     }
 }
+//09/09/24
 
     @Preview(showBackground = true)
     @Composable
-    fun Picture(){
-        Column (
+    fun Picture() {
+        Column(
             modifier = Modifier
                 .fillMaxSize()
                 .background(Color.Black)
 
-            ){
+        ) {
+            Image(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                painter = painterResource(R.drawable.android),
+                contentDescription = "Logo Android",
+                contentScale = ContentScale.Crop
+            )
+
+
+        }
+        }
+
+        @Preview(showBackground = true)
+        @Composable
+        fun Content1() {
+            Card(
+                modifier = Modifier
+                    .background(Color.LightGray)
+                    .fillMaxWidth()
+                    .padding(5.dp)
+            ) {
+                Text(
+                    text = "This is a Title",
+                    fontSize = 24.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier
+                        .padding(10.dp)
+                )
                 Image(
                     modifier = Modifier
                         .fillMaxWidth(),
-                    painter = painterResource(R.drawable.android),
-                    contentDescription ="Logo Android",
+                    painter = painterResource(id = R.drawable.android),
+                    contentDescription = "Android Logo",
                     contentScale = ContentScale.Crop
                 )
+                Text(
+                    stringResource(R.string.text_card),
+                    textAlign = TextAlign.Justify,
+                    lineHeight = 18.sp,
+                    modifier = Modifier
+                        .padding(10.dp)
+                )
+            }
+        }
+
+        @Preview(showBackground = true)
+        @Composable
+        fun Content2(){
+         Card(
+                modifier = Modifier
+                    .background(Color.LightGray)
+                    .fillMaxWidth()
+                    .padding(5.dp)
+    ){
+        Row {
+            Image(
+                modifier = Modifier
+                    .width(150.dp)
+                    .height(150.dp),
+                //.fillMaxWidth()
+                painter = painterResource(id = R.drawable.android),
+                contentDescription = "Android Logo",
+                contentScale = ContentScale.Crop
+            )
+            Column {
+                Text (text = "This is a Title",
+                    fontSize = 24.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier
+                        .padding(10.dp)
+                )
+                Text(
+                    stringResource(R.string.text_card),
+                    textAlign = TextAlign.Justify,
+                    lineHeight = 18.sp,
+                    maxLines = 5,
+                    modifier = Modifier
+                        .padding(10.dp)
+                )
+            }
 
 
         }
 
-    fun  clickAction() {
-        println("Column Clicked")
     }
+}
+
+        fun clickAction() {
+            println("Column Clicked")
+        }
 
 
-    }
+
+
+
+
 
