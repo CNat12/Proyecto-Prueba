@@ -28,6 +28,7 @@ import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -45,7 +46,15 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.ita.proyectoprueba.ui.theme.ProyectoPruebaTheme
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.ita.proyectoprueba.ui.screens.HomeScreen
+import com.ita.proyectoprueba.ui.screens.MenuScreen
+
+//import androidx.navigation.compose.NavHostController
 
 
 class MainActivity : ComponentActivity() {
@@ -53,6 +62,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         //enableEdgeToEdge()
         setContent {
+            ComposeMultiSreenApp()
             /*Box {
                 Text(text = "Label 1")
                 Text(text = "Label 2")
@@ -60,7 +70,7 @@ class MainActivity : ComponentActivity() {
             Greeting(name = "World")
         }*/
 
-            Column(
+            /*Column(
                 modifier = Modifier
                     .fillMaxSize()
                     .fillMaxSize()
@@ -315,7 +325,7 @@ fun BoxExample(){
                 Image(
                     painterResource(R.drawable.android),
                     contentDescription = "Android Logo",
-                    contentScale = ContentScale.FillBounds
+                    contentScale = ContentScale.FillWidth
 
                 )
             Row(
@@ -340,7 +350,7 @@ fun BoxExample(){
 
             }
 }
-@Preview(showBackground = true)
+/*@Preview(showBackground = true)
 @Composable
 fun BoxExample2(){
     Box(
@@ -348,7 +358,7 @@ fun BoxExample2(){
             .background(Color.Magenta)
             .padding(3.dp)
             .size(250.dp)
-    ){/*Acomo de texto*/
+    ){/*Acomodo de texto*/
         Text(text = "TopStart", Modifier.align(Alignment.TopStart))
         Text(text = "TopEnd", Modifier.align(Alignment.TopEnd))
         Text(text = "CenterStart", Modifier.align(Alignment.CenterStart))
@@ -364,6 +374,25 @@ fun BoxExample2(){
         fun clickAction() {
             println("Column Clicked")
         }
+*/
+
+@Composable
+fun ComposeMultiSreenApp(){
+    val navCOntroller = rememberNavController()
+    Surface(color= Color.White) {
+        SetupNavGraph(navController = navCOntroller)
+
+    }
+}
+@Composable
+fun SetupNavGraph(navController:NavHostController){
+    NavHost(navController,startDestination ="menu"){
+
+        composable("Menu") { MenuScreen(navController) }
+        composable("home") { HomeScreen(navController) }
+
+    }
+}
 
 
 
