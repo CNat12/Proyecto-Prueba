@@ -53,6 +53,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.ita.proyectoprueba.ui.screens.HomeScreen
 import com.ita.proyectoprueba.ui.screens.MenuScreen
+import com.ita.proyectoprueba.ui.screens.PruebaInter
+
 
 //import androidx.navigation.compose.NavHostController
 
@@ -63,6 +65,7 @@ class MainActivity : ComponentActivity() {
         //enableEdgeToEdge()
         setContent {
             ComposeMultiSreenApp()
+
             /*Box {
                 Text(text = "Label 1")
                 Text(text = "Label 2")
@@ -350,7 +353,7 @@ fun BoxExample(){
 
             }
 }
-/*@Preview(showBackground = true)
+@Preview(showBackground = true)
 @Composable
 fun BoxExample2(){
     Box(
@@ -374,7 +377,7 @@ fun BoxExample2(){
         fun clickAction() {
             println("Column Clicked")
         }
-*/
+
 
 @Composable
 fun ComposeMultiSreenApp(){
@@ -385,14 +388,16 @@ fun ComposeMultiSreenApp(){
     }
 }
 @Composable
-fun SetupNavGraph(navController:NavHostController){
-    NavHost(navController,startDestination ="menu"){
+fun SetupNavGraph(navController:NavHostController) {
+    NavHost(navController, startDestination = "menu") {
 
         composable("Menu") { MenuScreen(navController) }
-        composable("home") { HomeScreen(navController) }
+        composable("Home") { HomeScreen(navController) }
+        composable ("Prueba"){ PruebaInter (navController) }
 
+        }
     }
-}
+
 
 
 
