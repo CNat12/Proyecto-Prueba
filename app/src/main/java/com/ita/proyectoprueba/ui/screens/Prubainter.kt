@@ -345,4 +345,4 @@ fun PruebaInter(navController: NavController) {
                 )
             }
         }
-        }
+    }
