@@ -26,8 +26,8 @@ fun MenuScreen(navController: NavController) {
     /*Column {
         Text("This is the Menu Screen")
         //Button(onClick = {navController.navigate("menu")})
-        Button(onClick = { navController.navigate("home") })
-        //Button(onClick = {navController.navigate("Prueba")})
+        //Button(onClick = { navController.navigate("home") })
+        Button(onClick = {navController.navigate("ComponentsScreen")})
 
         {
 
@@ -85,6 +85,24 @@ Column(
                 fontWeight = FontWeight.Medium
             )
         }
+    Button(
+        onClick = { navController.navigate("ComponentsScreen") },
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp)
+            .height(50.dp),
+        colors = ButtonDefaults.buttonColors(
+            contentColor = Color.White
+        )
+    )
+    {
+        Text(
+            text = "ComponentsF",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Medium
+        )
+    }
 }
 }
+
 

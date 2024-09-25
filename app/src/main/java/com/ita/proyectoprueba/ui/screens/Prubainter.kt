@@ -62,6 +62,7 @@ fun PruebaInter(navController: NavController) {
         modifier = Modifier
             .fillMaxSize()
             .background(Color.Black)
+            
             .padding(5.dp)
     ) {
 

@@ -1,5 +1,6 @@
 package com.ita.proyectoprueba
 
+import android.content.pm.PackageManager.ComponentEnabledSetting
 import android.graphics.Picture
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -51,6 +52,7 @@ import com.ita.proyectoprueba.ui.theme.ProyectoPruebaTheme
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.ita.proyectoprueba.ui.screens.ComponentsScreen
 import com.ita.proyectoprueba.ui.screens.HomeScreen
 import com.ita.proyectoprueba.ui.screens.MenuScreen
 import com.ita.proyectoprueba.ui.screens.PruebaInter
@@ -344,7 +346,7 @@ fun BoxExample(){
                     contentDescription = "Icon Account"
                 )
                 //va llenar el 100% de la imagen*/
-                Text(text = "Text")
+               // Text(text = "Text")
                 /*textAlign = TextAlign.Center,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -394,6 +396,8 @@ fun SetupNavGraph(navController:NavHostController) {
         composable("Menu") { MenuScreen(navController) }
         composable("Home") { HomeScreen(navController) }
         composable ("Prueba"){ PruebaInter (navController) }
+        composable ("ComponentsScreen") { ComponentsScreen (navController) }
+
 
         }
     }
