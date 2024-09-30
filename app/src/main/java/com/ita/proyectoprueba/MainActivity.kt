@@ -52,7 +52,7 @@ import com.ita.proyectoprueba.ui.theme.ProyectoPruebaTheme
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.ita.proyectoprueba.ui.screens.ComponentsScreen
+import com.example.project1.ui.screens.ComponentsScreen
 import com.ita.proyectoprueba.ui.screens.HomeScreen
 import com.ita.proyectoprueba.ui.screens.MenuScreen
 import com.ita.proyectoprueba.ui.screens.PruebaInter
@@ -396,7 +396,7 @@ fun SetupNavGraph(navController:NavHostController) {
         composable("Menu") { MenuScreen(navController) }
         composable("Home") { HomeScreen(navController) }
         composable ("Prueba"){ PruebaInter (navController) }
-        composable ("ComponentsScreen") { ComponentsScreen (navController) }
+        composable ("ComponentsScreen") { ComponentsScreen(navController) }
 
 
         }
