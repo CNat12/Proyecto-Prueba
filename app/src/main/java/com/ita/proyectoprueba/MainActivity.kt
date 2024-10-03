@@ -64,7 +64,7 @@ import com.ita.proyectoprueba.ui.screens.PruebaInter
 class MainActivity : ComponentActivity() {
     override fun onCreate (savedInstanceState: Bundle?) { //cuando entra por primera vez y aqui se pone el contenido
         super.onCreate(savedInstanceState)
-        //enableEdgeToEdge()
+        enableEdgeToEdge()
         setContent {
             ComposeMultiSreenApp()
 
