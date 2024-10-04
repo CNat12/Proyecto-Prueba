@@ -29,6 +29,10 @@ import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.outlined.Menu
+import androidx.compose.material.icons.outlined.Refresh
+import androidx.compose.material.icons.outlined.Search
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.AssistChipDefaults
@@ -923,7 +927,7 @@ fun Bars(){
                 IconButton(onClick = {}, Modifier.size(30.dp)) {
                     Icon(
                         Icons.Outlined.Home,
-                        contentDescription = "",
+                        contentDescription = "Home",
                         tint=Color.White,
                         modifier = Modifier.fillMaxSize()
                     )
@@ -934,49 +938,49 @@ fun Bars(){
             Column {
                 IconButton(onClick = {}, Modifier.size(30.dp)) {
                     Icon(
-                        Icons.Outlined.Home,
-                        contentDescription = "",
+                        Icons.Outlined.Search,
+                        contentDescription = "Search",
                         tint=Color.White,
                         modifier = Modifier.fillMaxSize()
                     )
                 }
-                Text(text="Home", color= Color.White)
+                Text(text="Search", color= Color.White)
             }
 
             Column {
                 IconButton(onClick = {}, Modifier.size(30.dp)) {
                     Icon(
-                        Icons.Outlined.Home,
-                        contentDescription = "",
+                        Icons.Outlined.Menu,
+                        contentDescription = "Menu",
                         tint=Color.White,
                         modifier = Modifier.fillMaxSize()
                     )
                 }
-                Text(text="Home", color= Color.White)
+                Text(text="Menu", color= Color.White)
             }
 
             Column {
                 IconButton(onClick = {}, Modifier.size(30.dp)) {
                     Icon(
-                        Icons.Outlined.Home,
-                        contentDescription = "",
+                        Icons.Outlined.Settings,
+                        contentDescription = "Settings",
                         tint=Color.White,
                         modifier = Modifier.fillMaxSize()
                     )
                 }
-                Text(text="Home", color= Color.White)
+                Text(text="Settings", color= Color.White)
             }
 
             Column{
                 IconButton(onClick = {}, Modifier.size(30.dp)) {
                     Icon(
-                        Icons.Outlined.Home,
-                        contentDescription = "",
+                        Icons.Outlined.Refresh,
+                        contentDescription = "Refresh",
                         tint=Color.White,
                         modifier = Modifier.fillMaxSize()
                     )
                 }
-                Text(text="Home", color= Color.White)
+                Text(text="Refresh", color= Color.White)
 
             }
 

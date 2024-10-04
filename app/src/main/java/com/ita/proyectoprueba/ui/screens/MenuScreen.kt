@@ -97,7 +97,7 @@ Column(
     )
     {
         Text(
-            text = "ComponentsF",
+            text = "Components",
             fontSize = 18.sp,
             fontWeight = FontWeight.Medium
         )
