@@ -1,5 +1,6 @@
 package com.ita.proyectoprueba
 
+import android.content.pm.PackageManager.ComponentEnabledSetting
 import android.graphics.Picture
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -51,8 +52,11 @@ import com.ita.proyectoprueba.ui.theme.ProyectoPruebaTheme
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.project1.ui.screens.ComponentsScreen
 import com.ita.proyectoprueba.ui.screens.HomeScreen
 import com.ita.proyectoprueba.ui.screens.MenuScreen
+import com.ita.proyectoprueba.ui.screens.PruebaInter
+
 
 //import androidx.navigation.compose.NavHostController
 
@@ -60,9 +64,10 @@ import com.ita.proyectoprueba.ui.screens.MenuScreen
 class MainActivity : ComponentActivity() {
     override fun onCreate (savedInstanceState: Bundle?) { //cuando entra por primera vez y aqui se pone el contenido
         super.onCreate(savedInstanceState)
-        //enableEdgeToEdge()
+        enableEdgeToEdge()
         setContent {
             ComposeMultiSreenApp()
+
             /*Box {
                 Text(text = "Label 1")
                 Text(text = "Label 2")
@@ -341,7 +346,7 @@ fun BoxExample(){
                     contentDescription = "Icon Account"
                 )
                 //va llenar el 100% de la imagen*/
-                Text(text = "Text")
+               // Text(text = "Text")
                 /*textAlign = TextAlign.Center,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -350,7 +355,7 @@ fun BoxExample(){
 
             }
 }
-/*@Preview(showBackground = true)
+@Preview(showBackground = true)
 @Composable
 fun BoxExample2(){
     Box(
@@ -374,7 +379,7 @@ fun BoxExample2(){
         fun clickAction() {
             println("Column Clicked")
         }
-*/
+
 
 @Composable
 fun ComposeMultiSreenApp(){
@@ -385,14 +390,18 @@ fun ComposeMultiSreenApp(){
     }
 }
 @Composable
-fun SetupNavGraph(navController:NavHostController){
-    NavHost(navController,startDestination ="menu"){
+fun SetupNavGraph(navController:NavHostController) {
+    NavHost(navController, startDestination = "menu") {
 
         composable("Menu") { MenuScreen(navController) }
-        composable("home") { HomeScreen(navController) }
+        composable("Home") { HomeScreen(navController) }
+        composable ("Prueba"){ PruebaInter (navController) }
+        composable ("ComponentsScreen") { ComponentsScreen(navController) }
 
+
+        }
     }
-}
+
 
 
 
