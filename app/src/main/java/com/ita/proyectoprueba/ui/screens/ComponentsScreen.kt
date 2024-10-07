@@ -23,6 +23,7 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Settings
@@ -80,6 +81,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -92,6 +94,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Popup
 import androidx.navigation.NavController
+import com.ita.proyectoprueba.data.model.MenuModel
 import com.ita.proyectoprueba.data.model.PostModel
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -101,7 +104,7 @@ import java.util.Locale
 
 @Composable
 fun ComponentsScreen(navController: NavController) {
-    var component by remember { mutableStateOf("") } //Actualizar el valor de la variable
+    var component by rememberSaveable { mutableStateOf("") } //Actualizar el valor de la variable
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
     ModalNavigationDrawer(  //current state of drawer
@@ -110,8 +113,42 @@ fun ComponentsScreen(navController: NavController) {
         drawerContent = {
             ModalDrawerSheet {
                 Text("Menu", modifier = Modifier.padding(16.dp))
-                //Content 1
                 HorizontalDivider()
+
+                val menuOptions = arrayOf(
+                    MenuModel(1, "Buttons", "Buttons", Icons.Filled.AccountBox),
+                    MenuModel(2, "FloatingButtons", "FloatingButtons", Icons.Filled.DateRange),
+                    MenuModel(3, "Chips", "Chips", Icons.Filled.DateRange),
+                    MenuModel(4, "Progress", "Progress", Icons.Filled.DateRange),
+                    MenuModel(5, "Sliders", "Sliders", Icons.Filled.DateRange),
+                    MenuModel(6, "Switches", "Switches", Icons.Filled.DateRange),
+                    MenuModel(7, "Badges", "Badges", Icons.Filled.DateRange),
+                    MenuModel(8, "TimePickers", "TimePickers", Icons.Filled.DateRange),
+                    MenuModel(9, "DatePickers", "DatePickers", Icons.Filled.DateRange),
+                    MenuModel(10, "SnackBar", "SnackBar", Icons.Filled.DateRange),
+                    MenuModel(11, "AlertDialogs", "AlertDialogs", Icons.Filled.DateRange),
+                    MenuModel(12, "Bars", "Bars", Icons.Filled.DateRange),
+
+                    )
+                LazyColumn {
+                    items(menuOptions) { item ->
+                        NavigationDrawerItem(
+                            icon = { Icon(item.icon, contentDescription = "") },
+                            label = { Text(text = item.title )},
+                            selected = false,
+                            onClick = {
+                                component = item.option
+                                scope.launch {
+                                    drawerState.apply {
+                                        close()
+                                    }
+                                }
+                            }
+                        )
+
+                    }
+                }
+                /*
                 NavigationDrawerItem(
                     label = { Text(text = "Content 1") },
                     selected = false,
@@ -137,9 +174,9 @@ fun ComponentsScreen(navController: NavController) {
                             }
                         }
                     }
-                )
+                )*/
 
-                //Buttons
+                /*//Buttons
                 NavigationDrawerItem(
                     label = { Text(text = "Buttons") },
                     selected = false,
@@ -304,20 +341,20 @@ fun ComponentsScreen(navController: NavController) {
                             }
                         }
                     }
-                )
+                )*/
             }
         }
     ) {
         //ScreenContent
         Column {
             when (component) {
-                "Content 1" -> {
+                /*"Content 1" -> {
                     Content1()
                 }
 
                 "Content 2" -> {
                     Content2()
-                }
+                }*/
 
                 "Buttons" -> {
                     Buttons()
@@ -371,7 +408,7 @@ fun ComponentsScreen(navController: NavController) {
     }
 }
 
-@Composable
+/*@Composable
 fun Content1() {
     Text(
         text = "Content 1", modifier = Modifier
@@ -386,7 +423,7 @@ fun Content2() {
             .padding(0.dp, 30.dp, 0.dp, 0.dp)
     )
 }
-
+*/
 @Composable
 fun Buttons() {
     Column(
@@ -860,7 +897,7 @@ fun AlertDialogs() {
             )
         }
         Text(selectedOption)
-        Button(onClick = {showAlertDialog = true}) {
+        Button(onClick = { showAlertDialog = true }) {
             Text("Show alert dialog")
         }
     }
@@ -868,21 +905,21 @@ fun AlertDialogs() {
 
 @Preview(showBackground = true)
 @Composable
-fun Bars(){
+fun Bars() {
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.DarkGray)
-    ){
+    ) {
         Row(
             modifier = Modifier
                 .align(Alignment.TopCenter)
                 .fillMaxWidth()
                 .background(Color.Black)
-                .padding(10.dp,50.dp,10.dp,10.dp),
+                .padding(10.dp, 50.dp, 10.dp, 10.dp),
             horizontalArrangement = Arrangement.SpaceBetween
 
-        ){
+        ) {
             Icon(Icons.Filled.Menu, contentDescription = "", tint = Color.White)
             Text(
                 "App Title",
@@ -894,17 +931,17 @@ fun Bars(){
         }
 
         val post = arrayOf(
-            PostModel(1,"Title 1", "Text 1"),
-            PostModel(2,"Title 2", "Text 2"),
-            PostModel(3,"Title 3", "Text 3"),
-            PostModel(4,"Title 4", "Text 4")
+            PostModel(1, "Title 1", "Text 1"),
+            PostModel(2, "Title 2", "Text 2"),
+            PostModel(3, "Title 3", "Text 3"),
+            PostModel(4, "Title 4", "Text 4")
 
         )
 
-        Column (
+        Column(
             modifier = Modifier
                 .align(Alignment.TopCenter)
-                .padding(10.dp,90.dp,10.dp,50.dp)
+                .padding(10.dp, 90.dp, 10.dp, 50.dp)
                 .fillMaxSize()
             //.verticalScroll(rememberScrollState())
         ) {
@@ -919,7 +956,7 @@ fun Bars(){
                 .fillMaxWidth()
                 .height(65.dp)
                 .background(Color.Black)
-                .padding(2.dp,5.dp),
+                .padding(2.dp, 5.dp),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
 
@@ -928,11 +965,11 @@ fun Bars(){
                     Icon(
                         Icons.Outlined.Home,
                         contentDescription = "Home",
-                        tint=Color.White,
+                        tint = Color.White,
                         modifier = Modifier.fillMaxSize()
                     )
                 }
-                Text(text="Home", color= Color.White)
+                Text(text = "Home", color = Color.White)
             }
 
             Column {
@@ -940,11 +977,11 @@ fun Bars(){
                     Icon(
                         Icons.Outlined.Search,
                         contentDescription = "Search",
-                        tint=Color.White,
+                        tint = Color.White,
                         modifier = Modifier.fillMaxSize()
                     )
                 }
-                Text(text="Search", color= Color.White)
+                Text(text = "Search", color = Color.White)
             }
 
             Column {
@@ -952,11 +989,11 @@ fun Bars(){
                     Icon(
                         Icons.Outlined.Menu,
                         contentDescription = "Menu",
-                        tint=Color.White,
+                        tint = Color.White,
                         modifier = Modifier.fillMaxSize()
                     )
                 }
-                Text(text="Menu", color= Color.White)
+                Text(text = "Menu", color = Color.White)
             }
 
             Column {
@@ -964,23 +1001,23 @@ fun Bars(){
                     Icon(
                         Icons.Outlined.Settings,
                         contentDescription = "Settings",
-                        tint=Color.White,
+                        tint = Color.White,
                         modifier = Modifier.fillMaxSize()
                     )
                 }
-                Text(text="Settings", color= Color.White)
+                Text(text = "Settings", color = Color.White)
             }
 
-            Column{
+            Column {
                 IconButton(onClick = {}, Modifier.size(30.dp)) {
                     Icon(
                         Icons.Outlined.Refresh,
                         contentDescription = "Refresh",
-                        tint=Color.White,
+                        tint = Color.White,
                         modifier = Modifier.fillMaxSize()
                     )
                 }
-                Text(text="Refresh", color= Color.White)
+                Text(text = "Refresh", color = Color.White)
 
             }
 
@@ -989,14 +1026,14 @@ fun Bars(){
 }
 
 @Composable
-fun Posts(arrayPosts:Array<PostModel>){
+fun Posts(arrayPosts: Array<PostModel>) {
 
-    LazyColumn (
+    LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-    ){
+    ) {
 
-        items(arrayPosts){ post->
+        items(arrayPosts) { post ->
             Text(
                 text = post.text,
                 color = Color.White,
