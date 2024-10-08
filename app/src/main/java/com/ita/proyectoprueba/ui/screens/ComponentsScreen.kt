@@ -14,6 +14,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -87,6 +91,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -94,8 +99,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Popup
 import androidx.navigation.NavController
+import com.ita.proyectoprueba.R
 import com.ita.proyectoprueba.data.model.MenuModel
 import com.ita.proyectoprueba.data.model.PostModel
+import com.ita.proyectoprueba.ui.components.PosCard
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -134,7 +141,7 @@ fun ComponentsScreen(navController: NavController) {
                     items(menuOptions) { item ->
                         NavigationDrawerItem(
                             icon = { Icon(item.icon, contentDescription = "") },
-                            label = { Text(text = item.title )},
+                            label = { Text(text = item.title) },
                             selected = false,
                             onClick = {
                                 component = item.option
@@ -905,7 +912,7 @@ fun AlertDialogs() {
 
 @Preview(showBackground = true)
 @Composable
-fun Bars() {
+private fun Bars() {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -931,10 +938,16 @@ fun Bars() {
         }
 
         val post = arrayOf(
-            PostModel(1, "Title 1", "Text 1"),
-            PostModel(2, "Title 2", "Text 2"),
-            PostModel(3, "Title 3", "Text 3"),
-            PostModel(4, "Title 4", "Text 4")
+            PostModel(1, "Title 1", "Text 1", painterResource(R.drawable.android)),
+            PostModel(2, "Title 2", "Text 2", painterResource(R.drawable.android)),
+            PostModel(3, "Title 3", "Text 3", painterResource(R.drawable.android)),
+            PostModel(4, "Title 4", "Text 4", painterResource(R.drawable.android)),
+            PostModel(5, "Title 5", "Text 5", painterResource(R.drawable.android)),
+            PostModel(6, "Title 6", "Text 6", painterResource(R.drawable.android)),
+            PostModel(7, "Title 7", "Text 7", painterResource(R.drawable.android)),
+            PostModel(8, "Title 8", "Text 8", painterResource(R.drawable.android)),
+            PostModel(9, "Title 9", "Text 9", painterResource(R.drawable.android)),
+            PostModel(10, "Title 10", "Text 10", painterResource(R.drawable.android)),
 
         )
 
@@ -946,8 +959,9 @@ fun Bars() {
             //.verticalScroll(rememberScrollState())
         ) {
 
-            Posts(post)
-
+            //Posts(post)
+            //PostCard(1,"This card title","This is the card text", painterResource(R.drawable))
+            PostGrid(post)
         }
 
         Row(
@@ -1028,12 +1042,15 @@ fun Bars() {
 @Composable
 fun Posts(arrayPosts: Array<PostModel>) {
 
-    LazyColumn(
+    LazyRow(
         modifier = Modifier
             .fillMaxSize()
     ) {
-
         items(arrayPosts) { post ->
+            PosCard(post.id, post.title, post.text, post.image)
+
+
+            /*items(arrayPosts) { post ->
             Text(
                 text = post.text,
                 color = Color.White,
@@ -1042,6 +1059,21 @@ fun Posts(arrayPosts: Array<PostModel>) {
 
             Spacer(modifier = Modifier.height(16.dp))
             HorizontalDivider(thickness = 2.dp)
+
+        }*/
+        }
+    }
+}
+
+@Composable
+fun PostGrid(arrayPosts: Array<PostModel>) {
+    LazyVerticalGrid(
+        columns = GridCells.Adaptive(minSize = 128.dp),
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        items(arrayPosts) { post ->
+            PosCard(post.id, post.title, post.text, post.image)
 
         }
     }
