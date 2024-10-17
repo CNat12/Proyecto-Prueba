@@ -14,6 +14,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -23,6 +27,7 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Settings
@@ -72,19 +77,23 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TimeInput
 import androidx.compose.material3.TimePicker
+import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.currentComposer
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -92,7 +101,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Popup
 import androidx.navigation.NavController
+import androidx.window.core.layout.WindowHeightSizeClass
+import androidx.window.core.layout.WindowWidthSizeClass
+import com.ita.proyectoprueba.R
+import com.ita.proyectoprueba.data.model.MenuModel
 import com.ita.proyectoprueba.data.model.PostModel
+import com.ita.proyectoprueba.ui.components.PostCard
+import com.ita.proyectoprueba.ui.components.PostCardCompact
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -101,7 +116,7 @@ import java.util.Locale
 
 @Composable
 fun ComponentsScreen(navController: NavController) {
-    var component by remember { mutableStateOf("") } //Actualizar el valor de la variable
+    var component by rememberSaveable { mutableStateOf("") } //Actualizar el valor de la variable
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
     ModalNavigationDrawer(  //current state of drawer
@@ -110,8 +125,42 @@ fun ComponentsScreen(navController: NavController) {
         drawerContent = {
             ModalDrawerSheet {
                 Text("Menu", modifier = Modifier.padding(16.dp))
-                //Content 1
                 HorizontalDivider()
+
+                val menuOptions = arrayOf(
+                    MenuModel(1, "Buttons", "Buttons", Icons.Filled.AccountBox),
+                    MenuModel(2, "FloatingButtons", "FloatingButtons", Icons.Filled.DateRange),
+                    MenuModel(3, "Chips", "Chips", Icons.Filled.DateRange),
+                    MenuModel(4, "Progress", "Progress", Icons.Filled.DateRange),
+                    MenuModel(5, "Sliders", "Sliders", Icons.Filled.DateRange),
+                    MenuModel(6, "Switches", "Switches", Icons.Filled.DateRange),
+                    MenuModel(7, "Badges", "Badges", Icons.Filled.DateRange),
+                    MenuModel(8, "TimePickers", "TimePickers", Icons.Filled.DateRange),
+                    MenuModel(9, "DatePickers", "DatePickers", Icons.Filled.DateRange),
+                    MenuModel(10, "SnackBar", "SnackBar", Icons.Filled.DateRange),
+                    MenuModel(11, "AlertDialogs", "AlertDialogs", Icons.Filled.DateRange),
+                    MenuModel(12, "Bars", "Bars", Icons.Filled.DateRange),
+                    MenuModel(
+                        13, "Adaptive", "Adaptive", Icons.Filled.DateRange
+                    )
+                )
+
+                LazyColumn {
+                    items(menuOptions) { item ->
+                        NavigationDrawerItem(icon = { Icon(item.icon, contentDescription = "") },
+                            label = { Text(text = item.title) },
+                            selected = false,
+                            onClick = {
+                                component = item.option
+                                scope.launch {
+                                    drawerState.apply {
+                                        close()
+                                    }
+                                }
+                            })
+
+                    }
+                }/*
                 NavigationDrawerItem(
                     label = { Text(text = "Content 1") },
                     selected = false,
@@ -137,9 +186,9 @@ fun ComponentsScreen(navController: NavController) {
                             }
                         }
                     }
-                )
+                )*/
 
-                //Buttons
+                /*//Buttons
                 NavigationDrawerItem(
                     label = { Text(text = "Buttons") },
                     selected = false,
@@ -304,20 +353,18 @@ fun ComponentsScreen(navController: NavController) {
                             }
                         }
                     }
-                )
+                )*/
             }
-        }
-    ) {
+        }) {
         //ScreenContent
         Column {
-            when (component) {
-                "Content 1" -> {
+            when (component) {/*"Content 1" -> {
                     Content1()
                 }
 
                 "Content 2" -> {
                     Content2()
-                }
+                }*/
 
                 "Buttons" -> {
                     Buttons()
@@ -366,12 +413,16 @@ fun ComponentsScreen(navController: NavController) {
                 "Bars" -> {
                     Bars()
                 }
+
+                "Adaptive" -> {
+                    Adaptive()
+                }
             }
         }
     }
 }
 
-@Composable
+/*@Composable
 fun Content1() {
     Text(
         text = "Content 1", modifier = Modifier
@@ -386,14 +437,13 @@ fun Content2() {
             .padding(0.dp, 30.dp, 0.dp, 0.dp)
     )
 }
-
+*/
 @Composable
 fun Buttons() {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceEvenly,
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
         Button(onClick = {}) {
             Text(text = "Filled")
@@ -422,8 +472,7 @@ fun FloatingButtons() {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceEvenly,
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
 
         FloatingActionButton(onClick = {}) {
@@ -438,11 +487,9 @@ fun FloatingButtons() {
             Icon(Icons.Filled.Add, contentDescription = "")
         }
 
-        ExtendedFloatingActionButton(
-            onClick = {},
+        ExtendedFloatingActionButton(onClick = {},
             icon = { Icon(Icons.Filled.Add, contentDescription = "") },
-            text = { Text(text = "Extended FAB") }
-        )
+            text = { Text(text = "Extended FAB") })
     }
 }
 
@@ -451,64 +498,50 @@ fun Chips() {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceEvenly,
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
-        AssistChip(
-            onClick = {},
-            label = { Text(text = "Assist Chip") },
-            leadingIcon = {
-                Icon(
-                    Icons.Filled.AccountBox, contentDescription = "",
-                    modifier = Modifier
-                        .size(AssistChipDefaults.IconSize)
-                )
-            }
-        )
+        AssistChip(onClick = {}, label = { Text(text = "Assist Chip") }, leadingIcon = {
+            Icon(
+                Icons.Filled.AccountBox,
+                contentDescription = "",
+                modifier = Modifier.size(AssistChipDefaults.IconSize)
+            )
+        })
 
         var selected by remember { mutableStateOf(false) }
 
-        FilterChip(
-            selected = selected,
+        FilterChip(selected = selected,
             onClick = { selected = !selected },
             label = { Text(text = "Filter Chip") },
             leadingIcon = if (selected) {
                 {
                     Icon(
-                        Icons.Filled.AccountBox, contentDescription = "",
-                        modifier = Modifier
-                            .size(AssistChipDefaults.IconSize)
+                        Icons.Filled.AccountBox,
+                        contentDescription = "",
+                        modifier = Modifier.size(AssistChipDefaults.IconSize)
                     )
                 }
             } else {
                 null
-            }
-        )
+            })
     }
 
-    InputChipExample(
-        text = "Dismiss",
-        {}
-    )
+    InputChipExample(text = "Dismiss", {})
 
 }
 
 @Composable
 fun InputChipExample(
-    text: String,
-    onDismiss: () -> Unit
+    text: String, onDismiss: () -> Unit
 ) {
     var enabled by remember { mutableStateOf(true) }
 
     if (!enabled) return
 
-    InputChip(
-        label = { Text(text) },
-        selected = enabled,
-        onClick = {
-            onDismiss()
-            enabled = !enabled
-        },
+    InputChip(label = { Text(text) }, selected = enabled, onClick = {
+        onDismiss()
+        enabled = !enabled
+    },
 
         avatar = {
             Icon(
@@ -526,8 +559,7 @@ fun InputChipExample(
                 Modifier.size(InputChipDefaults.AvatarSize)
 
             )
-        }
-    )
+        })
 }
 
 @Preview(showBackground = true)
@@ -536,18 +568,15 @@ fun Progress() {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceEvenly,
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
 
         LinearProgressIndicator(
-            modifier = Modifier
-                .fillMaxWidth()
+            modifier = Modifier.fillMaxWidth()
         )
 
         CircularProgressIndicator(
-            modifier = Modifier
-                .width(64.dp)
+            modifier = Modifier.width(64.dp)
         )
 
     }
@@ -559,8 +588,7 @@ fun Sliders() {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceEvenly,
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
 
         var sliderPosition by remember { mutableStateOf(50f) }
@@ -575,8 +603,7 @@ fun Sliders() {
 
             Text(
                 textAlign = TextAlign.Center,
-                modifier = Modifier
-                    .fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth(),
                 text = sliderPosition.toString()
             )
 
@@ -590,45 +617,34 @@ fun Switches() {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceEvenly,
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
 
         var checked by remember { mutableStateOf(true) }
 
-        Switch(
-            checked = checked,
-            onCheckedChange = {
-                checked = it
-            }
-        )
+        Switch(checked = checked, onCheckedChange = {
+            checked = it
+        })
 
         var checked2 by remember { mutableStateOf(true) }
 
-        Switch(
-            checked = checked2,
-            onCheckedChange = {
-                checked2 = it
-            },
-            thumbContent = if (checked2) {
-                {
-                    Icon(
-                        Icons.Filled.Check,
-                        contentDescription = "",
-                        Modifier.size(InputChipDefaults.AvatarSize)
+        Switch(checked = checked2, onCheckedChange = {
+            checked2 = it
+        }, thumbContent = if (checked2) {
+            {
+                Icon(
+                    Icons.Filled.Check,
+                    contentDescription = "",
+                    Modifier.size(InputChipDefaults.AvatarSize)
 
-                    )
-                }
-            } else {
-                null
+                )
             }
-        )
+        } else {
+            null
+        })
 
         var checked3 by remember { mutableStateOf(true) }
-        Checkbox(
-            checked = checked3,
-            onCheckedChange = { checked3 = it }
-        )
+        Checkbox(checked = checked3, onCheckedChange = { checked3 = it })
 
     }
 }
@@ -639,32 +655,25 @@ fun Badges() {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceEvenly,
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
         var itemCount by remember { mutableStateOf(0) }
 
-        BadgedBox(
-            badge = {
-                if (itemCount > 0) {
-                    Badge(
-                        containerColor = Color.Red,
-                        contentColor = Color.White
-                    ) {
-                        Text("$itemCount")
-                    }
+        BadgedBox(badge = {
+            if (itemCount > 0) {
+                Badge(
+                    containerColor = Color.Red, contentColor = Color.White
+                ) {
+                    Text("$itemCount")
                 }
             }
-        ) {
+        }) {
             Icon(
-                imageVector = Icons.Filled.ShoppingCart,
-                contentDescription = ""
+                imageVector = Icons.Filled.ShoppingCart, contentDescription = ""
             )
         }
 
-        Button(
-            onClick = { itemCount++ }
-        ) {
+        Button(onClick = { itemCount++ }) {
             Text("Add item")
         }
     }
@@ -676,8 +685,7 @@ fun TimePickers() {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceEvenly,
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
 
         DialExample()
@@ -691,8 +699,7 @@ fun DatePickers() {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceEvenly,
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
 
         DatePickerDocked()
@@ -750,16 +757,14 @@ fun DatePickerDocked() {
     Box(
         modifier = Modifier.fillMaxWidth()
     ) {
-        OutlinedTextField(
-            value = selectedDate,
+        OutlinedTextField(value = selectedDate,
             onValueChange = { },
             label = { Text("DOB") },
             readOnly = true,
             trailingIcon = {
                 IconButton(onClick = { showDatePicker = !showDatePicker }) {
                     Icon(
-                        imageVector = Icons.Default.DateRange,
-                        contentDescription = "Select date"
+                        imageVector = Icons.Default.DateRange, contentDescription = "Select date"
                     )
                 }
             },
@@ -770,8 +775,7 @@ fun DatePickerDocked() {
 
         if (showDatePicker) {
             Popup(
-                onDismissRequest = { showDatePicker = false },
-                alignment = Alignment.TopStart
+                onDismissRequest = { showDatePicker = false }, alignment = Alignment.TopStart
             ) {
                 Box(
                     modifier = Modifier
@@ -782,8 +786,7 @@ fun DatePickerDocked() {
                         .padding(16.dp)
                 ) {
                     DatePicker(
-                        state = datePickerState,
-                        showModeToggle = false
+                        state = datePickerState, showModeToggle = false
                     )
                 }
             }
@@ -802,8 +805,7 @@ fun SnackBar() {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceEvenly,
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
 
         val snackState = remember { SnackbarHostState() }
@@ -828,89 +830,86 @@ fun AlertDialogs() {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceEvenly,
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
 
         var showAlertDialog by remember { mutableStateOf(false) }
         var selectedOption by remember { mutableStateOf("") }
 
         if (showAlertDialog) {
-            AlertDialog(
-                icon = { Icon(Icons.Filled.Warning, contentDescription = "") },
+            AlertDialog(icon = { Icon(Icons.Filled.Warning, contentDescription = "") },
                 title = { Text("Confirm deletion") },
                 text = { Text("Are you sure you want to delete the file?") },
                 onDismissRequest = {},
                 confirmButton = {
-                    TextButton(
-                        onClick = {
-                            selectedOption = "Confirm"
-                            showAlertDialog = false
-                        }
-                    ) { Text("Confirm") }
+                    TextButton(onClick = {
+                        selectedOption = "Confirm"
+                        showAlertDialog = false
+                    }) { Text("Confirm") }
                 },
                 dismissButton = {
-                    TextButton(
-                        onClick = {
-                            selectedOption = "Dismiss"
-                            showAlertDialog = false
-                        }
-                    ) { Text("Dismiss") }
-                }
-            )
+                    TextButton(onClick = {
+                        selectedOption = "Dismiss"
+                        showAlertDialog = false
+                    }) { Text("Dismiss") }
+                })
         }
         Text(selectedOption)
-        Button(onClick = {showAlertDialog = true}) {
+        Button(onClick = { showAlertDialog = true }) {
             Text("Show alert dialog")
         }
     }
 }
 
-@Preview(showBackground = true)
 @Composable
-fun Bars(){
+private fun Bars() {
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.DarkGray)
-    ){
+    ) {
         Row(
             modifier = Modifier
                 .align(Alignment.TopCenter)
                 .fillMaxWidth()
                 .background(Color.Black)
-                .padding(10.dp,50.dp,10.dp,10.dp),
+                .padding(10.dp, 50.dp, 10.dp, 10.dp),
             horizontalArrangement = Arrangement.SpaceBetween
 
-        ){
+        ) {
             Icon(Icons.Filled.Menu, contentDescription = "", tint = Color.White)
             Text(
-                "App Title",
-                color = Color.White,
-                fontWeight = FontWeight.Bold
+                "App Title", color = Color.White, fontWeight = FontWeight.Bold
             )
             Icon(Icons.Filled.Settings, contentDescription = "", tint = Color.White)
 
         }
 
         val post = arrayOf(
-            PostModel(1,"Title 1", "Text 1"),
-            PostModel(2,"Title 2", "Text 2"),
-            PostModel(3,"Title 3", "Text 3"),
-            PostModel(4,"Title 4", "Text 4")
+            PostModel(1, "Title 1", "Text 1", painterResource(R.drawable.android)),
+            PostModel(2, "Title 2", "Text 2", painterResource(R.drawable.android)),
+            PostModel(3, "Title 3", "Text 3", painterResource(R.drawable.android)),
+            PostModel(4, "Title 4", "Text 4", painterResource(R.drawable.android)),
+            PostModel(5, "Title 5", "Text 5", painterResource(R.drawable.android)),
+            PostModel(6, "Title 6", "Text 6", painterResource(R.drawable.android)),
+            PostModel(7, "Title 7", "Text 7", painterResource(R.drawable.android)),
+            PostModel(8, "Title 8", "Text 8", painterResource(R.drawable.android)),
+            PostModel(9, "Title 9", "Text 9", painterResource(R.drawable.android)),
+            PostModel(10, "Title 10", "Text 10", painterResource(R.drawable.android)),
 
-        )
+            )
 
-        Column (
+        Column(
             modifier = Modifier
                 .align(Alignment.TopCenter)
-                .padding(10.dp,90.dp,10.dp,50.dp)
+                .padding(10.dp, 90.dp, 10.dp, 50.dp)
                 .fillMaxSize()
             //.verticalScroll(rememberScrollState())
         ) {
 
-            Posts(post)
-
+            //Posts(post)
+            //PostCard(1,"This card title","This is the card text", painterResource(R.drawable))
+            //PostGrid(post)
         }
 
         Row(
@@ -919,7 +918,7 @@ fun Bars(){
                 .fillMaxWidth()
                 .height(65.dp)
                 .background(Color.Black)
-                .padding(2.dp,5.dp),
+                .padding(2.dp, 5.dp),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
 
@@ -928,11 +927,11 @@ fun Bars(){
                     Icon(
                         Icons.Outlined.Home,
                         contentDescription = "Home",
-                        tint=Color.White,
+                        tint = Color.White,
                         modifier = Modifier.fillMaxSize()
                     )
                 }
-                Text(text="Home", color= Color.White)
+                Text(text = "Home", color = Color.White)
             }
 
             Column {
@@ -940,11 +939,11 @@ fun Bars(){
                     Icon(
                         Icons.Outlined.Search,
                         contentDescription = "Search",
-                        tint=Color.White,
+                        tint = Color.White,
                         modifier = Modifier.fillMaxSize()
                     )
                 }
-                Text(text="Search", color= Color.White)
+                Text(text = "Search", color = Color.White)
             }
 
             Column {
@@ -952,11 +951,11 @@ fun Bars(){
                     Icon(
                         Icons.Outlined.Menu,
                         contentDescription = "Menu",
-                        tint=Color.White,
+                        tint = Color.White,
                         modifier = Modifier.fillMaxSize()
                     )
                 }
-                Text(text="Menu", color= Color.White)
+                Text(text = "Menu", color = Color.White)
             }
 
             Column {
@@ -964,23 +963,23 @@ fun Bars(){
                     Icon(
                         Icons.Outlined.Settings,
                         contentDescription = "Settings",
-                        tint=Color.White,
+                        tint = Color.White,
                         modifier = Modifier.fillMaxSize()
                     )
                 }
-                Text(text="Settings", color= Color.White)
+                Text(text = "Settings", color = Color.White)
             }
 
-            Column{
+            Column {
                 IconButton(onClick = {}, Modifier.size(30.dp)) {
                     Icon(
                         Icons.Outlined.Refresh,
                         contentDescription = "Refresh",
-                        tint=Color.White,
+                        tint = Color.White,
                         modifier = Modifier.fillMaxSize()
                     )
                 }
-                Text(text="Refresh", color= Color.White)
+                Text(text = "Refresh", color = Color.White)
 
             }
 
@@ -989,23 +988,86 @@ fun Bars(){
 }
 
 @Composable
-fun Posts(arrayPosts:Array<PostModel>){
+fun Posts(arrayPosts: Array<PostModel>, adaptive: String) {
 
-    LazyColumn (
-        modifier = Modifier
-            .fillMaxSize()
-    ){
+    LazyColumn(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        items(arrayPosts) { post ->
+            when (adaptive) {
+                "PhoneP" -> {
+                    PostCardCompact(post.id, post.title, post.text, post.image)
+                }
 
-        items(arrayPosts){ post->
-            Text(
-                text = post.text,
-                color = Color.White,
-                fontSize = 16.sp
-            )
+                "PhoneL" -> {
+                    PostCard(post.id, post.title, post.text, post.image)
+                }
 
-            Spacer(modifier = Modifier.height(16.dp))
-            HorizontalDivider(thickness = 2.dp)
 
+                /*items(arrayPosts) { post ->
+                Text(
+                    text = post.text,
+                    color = Color.White,
+                    fontSize = 16.sp
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
+                HorizontalDivider(thickness = 2.dp)
+
+            }*/
+            }
+        }
+    }
+
+    @Composable
+    fun PostGrid(arrayPosts: Array<PostModel>) {
+        LazyVerticalGrid(
+            columns = GridCells.Adaptive(minSize = 128.dp), modifier = Modifier.fillMaxSize()
+        ) {
+            items(arrayPosts) { post ->
+                PostCard(post.id, post.title, post.text, post.image)
+
+            }
         }
     }
 }
+
+    @Preview(showBackground = true, device = "spec:id=reference_tablet,shape=Normal,width=1280,height=800,unit=dp,dpi=240")
+    @Composable
+    fun Adaptive() {
+
+        var WindowsSize = currentWindowAdaptiveInfo().windowSizeClass
+        var height = currentWindowAdaptiveInfo().windowSizeClass.windowHeightSizeClass
+        var width = currentWindowAdaptiveInfo().windowSizeClass.windowWidthSizeClass
+        //Compact width < 600dp Phone portrait
+        //Medium width >= 600dp < 840dp Tablets portrait
+        //Expanded width >840dp Tablets landscape
+        //Text(text = WindowsSize.toString())
+
+        //Compact height < 480dp Phone landscape telefono ajustado
+        //Medium height <= 480dp < 900dp Tablet landscape or phone portrait
+        val post = arrayOf(
+            PostModel(1, "Title 1", "Text 1", painterResource(R.drawable.android)),
+            PostModel(2, "Title 2", "Text 2", painterResource(R.drawable.android)),
+            PostModel(3, "Title 3", "Text 3", painterResource(R.drawable.android)),
+            PostModel(4, "Title 4", "Text 4", painterResource(R.drawable.android)),
+            PostModel(5, "Title 5", "Text 5", painterResource(R.drawable.android)),
+            PostModel(6, "Title 6", "Text 6", painterResource(R.drawable.android)),
+            PostModel(7, "Title 7", "Text 7", painterResource(R.drawable.android)),
+            PostModel(8, "Title 8", "Text 8", painterResource(R.drawable.android)),
+            PostModel(9, "Title 9", "Text 9", painterResource(R.drawable.android)),
+            PostModel(10, "Title 10", "Text 10", painterResource(R.drawable.android)),
+
+            )
+        if (width == WindowWidthSizeClass.COMPACT) {
+            Posts(post, "PhoneP")
+        } else if (height == WindowHeightSizeClass.COMPACT) {
+            Posts(post, "PhoneL")
+        } else {
+            Posts(post, "PhoneL")
+
+        }
+    }
+
+
+
