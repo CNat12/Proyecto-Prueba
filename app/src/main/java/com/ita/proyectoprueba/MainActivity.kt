@@ -375,8 +375,6 @@ fun BoxExample2(){
 
     }
 }
-
-
         fun clickAction() {
             println("Column Clicked")
         }
