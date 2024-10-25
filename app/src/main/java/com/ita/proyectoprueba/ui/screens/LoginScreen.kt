@@ -23,12 +23,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.modifier.modifierLocalMapOf
+import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import org.jetbrains.annotations.Async
+import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 
 @Composable
@@ -40,53 +40,57 @@ fun LoginScreen(navController: NavController){
             .background(Color.Black)
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-    ){
+    ) {
         LoginForm(navController)
-
     }
-
 }
-//@Preview(showBackground = true)
+
 @Composable
-fun LoginForm(navController: NavController) {
+fun LoginForm(navController: NavController){
+
     var user by remember { mutableStateOf("") }
-        var password by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+
     Card (
         colors = CardDefaults.cardColors(
             contentColor = Color.White,
-            containerColor = Color.DarkGray
+            containerColor = Color.White
         ),
         modifier = Modifier
-            .padding(40.dp,0.dp)
+            .padding(40.dp, 0.dp)
+    ) {
 
-    ){
         Column (
             modifier = Modifier
-                .padding(20.dp)
+                .padding(20.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+
         ){
             AsyncImage(
-                model="http://adictosalainformatica.com/wp-content/uploads/2012/04/GitHub-Logo.png",
+                model = "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
                 contentDescription = "Github Logo",
                 contentScale = ContentScale.Fit
             )
+
             OutlinedTextField(
                 modifier = Modifier
                     .fillMaxWidth(),
-                value =  user,
+                value = user,
                 maxLines = 1,
-                onValueChange = { user=it },
+                onValueChange = {user = it},
                 label = { Text("User") }
-
-
             )
+
             OutlinedTextField(
                 modifier = Modifier
                     .fillMaxWidth(),
-                value =  password,
+                value = password,
                 maxLines = 1,
-                onValueChange = { password=it },
+                onValueChange = {user = it},
                 label = { Text("Password") },
-                visualTransformation = PasswordVisualTransformation())
+                visualTransformation = PasswordVisualTransformation()
+            )
+
             FilledTonalButton(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -95,6 +99,7 @@ fun LoginForm(navController: NavController) {
             ) {
                 Text("LOG IN")
             }
+
             OutlinedButton(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -102,9 +107,7 @@ fun LoginForm(navController: NavController) {
                 onClick = {navController.navigate("home")}
             ) {
                 Text("CREATE AN ACCOUNT")
-
+            }
         }
-
-    }
     }
 }
