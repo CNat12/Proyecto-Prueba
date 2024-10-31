@@ -3,6 +3,7 @@ package com.ita.proyectoprueba
 import android.content.pm.PackageManager.ComponentEnabledSetting
 import android.graphics.Picture
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -52,10 +53,15 @@ import com.ita.proyectoprueba.ui.theme.ProyectoPruebaTheme
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import com.example.project1.ui.screens.ComponentsScreen
+import com.ita.proyectoprueba.ui.screens.AlarmScreen
+import com.ita.proyectoprueba.ui.screens.AlarmWorker
 import com.ita.proyectoprueba.ui.screens.HomeScreen
 import com.ita.proyectoprueba.ui.screens.MenuScreen
 import com.ita.proyectoprueba.ui.screens.PruebaInter
+import java.util.concurrent.TimeUnit
 
 
 //import androidx.navigation.compose.NavHostController
@@ -66,7 +72,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+            ProyectoPruebaTheme {
             ComposeMultiSreenApp()
+
 
             /*Box {
                 Text(text = "Label 1")
@@ -354,7 +362,20 @@ fun BoxExample(){
             }
 
             }
+     }
+
+// Método para programar la alarma en segundo plano
+fun scheduleAlarm(delayInMillis: Long) {
+    val workRequest = OneTimeWorkRequestBuilder<AlarmWorker>()
+        .setInitialDelay(delayInMillis, TimeUnit.MILLISECONDS)
+        .build()
+
+    WorkManager.getInstance(this).enqueue(workRequest)
+    Toast.makeText(this, "Alarma programada", Toast.LENGTH_SHORT).show()
 }
+
+
+
 @Preview(showBackground = true)
 @Composable
 fun BoxExample2(){
@@ -387,20 +408,27 @@ fun ComposeMultiSreenApp(){
     Surface(color= Color.White) {
         SetupNavGraph(navController = navCOntroller)
 
+
+
     }
 }
-@Composable
-fun SetupNavGraph(navController:NavHostController) {
-    NavHost(navController, startDestination = "menu") {
+    @Composable
+    fun SetupNavGraph(navController: NavHostController) {
+        NavHost(navController, startDestination = "menu") {
 
-        composable("Menu") { MenuScreen(navController) }
-        composable("Home") { HomeScreen(navController) }
-        composable ("Prueba"){ PruebaInter (navController) }
-        composable ("ComponentsScreen") { ComponentsScreen(navController) }
-
-
+            composable("Menu") { MenuScreen(navController) }
+            composable("Home") { HomeScreen(navController) }
+            composable("Prueba") { PruebaInter(navController) }
+            composable("ComponentsScreen") { ComponentsScreen(navController) }
+            composable("Alarm"){ AlarmScreen(onSetAlarm = { delay ->
+                (navController.context as MainActivity).scheduleAlarm(delay)
+            })
         }
     }
+        }
+     }
+
+
 
 
 

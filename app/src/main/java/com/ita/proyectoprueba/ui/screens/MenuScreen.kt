@@ -102,6 +102,23 @@ Column(
             fontWeight = FontWeight.Medium
         )
     }
+    Button(
+        onClick = { navController.navigate("Alarm") },
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp)
+            .height(50.dp),
+        colors = ButtonDefaults.buttonColors(
+            contentColor = Color.White
+        )
+    )
+    {
+        Text(
+            text = "AlarmaScreen",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Medium
+        )
+    }
 }
 }
 
