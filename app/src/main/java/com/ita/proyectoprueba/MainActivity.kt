@@ -388,9 +388,9 @@ fun SetupNavGraph(navController: NavHostController) {
         composable("alarm") {
             AlarmScreen { delay ->
                 (navController.context as MainActivity).scheduleAlarm(delay)
-
+            }
+        }
                 composable("AgendaScreen") { AgendaScreen(navController) }
             }
         }
-    }
-}
+
