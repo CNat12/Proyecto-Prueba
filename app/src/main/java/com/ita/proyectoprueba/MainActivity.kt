@@ -1,89 +1,61 @@
 package com.ita.proyectoprueba
 
-import android.content.pm.PackageManager.ComponentEnabledSetting
-import android.graphics.Picture
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-//import androidx.compose.foundation.layout.FlowRowScopeInstance.weight
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountBox
-import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material3.Card
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Scaffold
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.ita.proyectoprueba.ui.theme.ProyectoPruebaTheme
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.example.project1.ui.screens.ComponentsScreen
-import com.ita.proyectoprueba.ui.screens.AlarmScreen
-import com.ita.proyectoprueba.ui.screens.AlarmWorker
-import com.ita.proyectoprueba.ui.screens.HomeScreen
-import com.ita.proyectoprueba.ui.screens.MenuScreen
-import com.ita.proyectoprueba.ui.screens.PruebaInter
+import com.ita.proyectoprueba.ui.screens.*
+import com.ita.proyectoprueba.ui.theme.ProyectoPruebaTheme
 import java.util.concurrent.TimeUnit
 
-
-//import androidx.navigation.compose.NavHostController
-
-
 class MainActivity : ComponentActivity() {
-    override fun onCreate (savedInstanceState: Bundle?) { //cuando entra por primera vez y aqui se pone el contenido
+
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Verifica y solicita permiso para notificaciones en Android 13 o superior
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(arrayOf(Manifest.permission.POST_NOTIFICATIONS), 1)
+            }
+        }
+
+
         enableEdgeToEdge()
         setContent {
             ProyectoPruebaTheme {
-            ComposeMultiSreenApp()
+                ComposeMultiScreenApp()
+            }
+        }
+    }
 
-
-            /*Box {
+                /*Box {
                 Text(text = "Label 1")
                 Text(text = "Label 2")
             }
             Greeting(name = "World")
         }*/
 
-            /*Column(
+                /*Column(
                 modifier = Modifier
                     .fillMaxSize()
                     .fillMaxSize()
@@ -354,79 +326,73 @@ fun BoxExample(){
                     contentDescription = "Icon Account"
                 )
                 //va llenar el 100% de la imagen*/
-               // Text(text = "Text")
+                // Text(text = "Text")
                 /*textAlign = TextAlign.Center,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(0.dp, 150.dp))*/
-            }
 
-            }
-     }
+    // Método para programar una alarma en segundo plano usando WorkManager
+    fun scheduleAlarm(delayInMillis: Long) {
+        val workRequest = OneTimeWorkRequestBuilder<AlarmWorker>()
+            .setInitialDelay(delayInMillis, TimeUnit.MILLISECONDS)
+            .build()
 
-// Método para programar la alarma en segundo plano
-fun scheduleAlarm(delayInMillis: Long) {
-    val workRequest = OneTimeWorkRequestBuilder<AlarmWorker>()
-        .setInitialDelay(delayInMillis, TimeUnit.MILLISECONDS)
-        .build()
-
-    WorkManager.getInstance(this).enqueue(workRequest)
-    Toast.makeText(this, "Alarma programada", Toast.LENGTH_SHORT).show()
-}
-
-
-
-@Preview(showBackground = true)
-@Composable
-fun BoxExample2(){
-    Box(
-        modifier = Modifier
-            .background(Color.Magenta)
-            .padding(3.dp)
-            .size(250.dp)
-    ){/*Acomodo de texto*/
-        Text(text = "TopStart", Modifier.align(Alignment.TopStart))
-        Text(text = "TopEnd", Modifier.align(Alignment.TopEnd))
-        Text(text = "CenterStart", Modifier.align(Alignment.CenterStart))
-        Text(text = "Center", Modifier.align(Alignment.Center))
-        Text(text = "CenterEnd", Modifier.align(Alignment.CenterEnd))
-        Text(text = "BottomStart", Modifier.align(Alignment.BottomStart))
-        Text(text = "BottomEnd", Modifier.align(Alignment.BottomEnd))
-
+        WorkManager.getInstance(this).enqueue(workRequest)
+        Toast.makeText(this, "Alarma programada", Toast.LENGTH_SHORT).show()
     }
 }
 
 
-        fun clickAction() {
-            println("Column Clicked")
-        }
-
-
-@Composable
-fun ComposeMultiSreenApp(){
-    val navCOntroller = rememberNavController()
-    Surface(color= Color.White) {
-        SetupNavGraph(navController = navCOntroller)
-
-
-
-    }
-}
+    /*@Preview(showBackground = true)
     @Composable
-    fun SetupNavGraph(navController: NavHostController) {
-        NavHost(navController, startDestination = "menu") {
+    fun BoxExample2() {
+        Box(
+            modifier = Modifier
+                .background(Color.Magenta)
+                .padding(3.dp)
+                .size(250.dp)
+        ) {/*Acomodo de texto*/
+            Text(text = "TopStart", Modifier.align(Alignment.TopStart))
+            Text(text = "TopEnd", Modifier.align(Alignment.TopEnd))
+            Text(text = "CenterStart", Modifier.align(Alignment.CenterStart))
+            Text(text = "Center", Modifier.align(Alignment.Center))
+            Text(text = "CenterEnd", Modifier.align(Alignment.CenterEnd))
+            Text(text = "BottomStart", Modifier.align(Alignment.BottomStart))
+            Text(text = "BottomEnd", Modifier.align(Alignment.BottomEnd))
 
-            composable("Menu") { MenuScreen(navController) }
-            composable("Home") { HomeScreen(navController) }
-            composable("Prueba") { PruebaInter(navController) }
-            composable("ComponentsScreen") { ComponentsScreen(navController) }
-            composable("Alarm"){ AlarmScreen(onSetAlarm = { delay ->
-                (navController.context as MainActivity).scheduleAlarm(delay)
-            })
         }
     }
+
+
+    fun clickAction() {
+        println("Column Clicked")
+    }*/
+
+@Composable
+fun ComposeMultiScreenApp() {
+    val navController = rememberNavController()
+    Surface(color = Color.White) {
+        SetupNavGraph(navController = navController)
+    }
+}
+
+// Configuración de la navegación entre pantallas
+@Composable
+fun SetupNavGraph(navController: NavHostController) {
+    NavHost(navController, startDestination = "menu") {
+        composable("menu") { MenuScreen(navController) }
+        composable("home") { HomeScreen(navController) }
+        composable("prueba") { PruebaInter(navController) }
+        composable("components") { ComponentsScreen(navController) }
+        composable("alarm") {
+            AlarmScreen { delay ->
+                (navController.context as MainActivity).scheduleAlarm(delay)
+            }
         }
-     }
+    }
+}
+
 
 
 
