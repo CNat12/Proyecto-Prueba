@@ -102,6 +102,40 @@ Column(
             fontWeight = FontWeight.Medium
         )
     }
+    Button(
+        onClick = { navController.navigate("alarm") },
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp)
+            .height(50.dp),
+        colors = ButtonDefaults.buttonColors(
+            contentColor = Color.White
+        )
+    )
+    {
+        Text(
+            text = "Alarma",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Medium
+        )
+    }
+    Button(
+        onClick = { navController.navigate("AgendaScreen") },
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp)
+            .height(50.dp),
+        colors = ButtonDefaults.buttonColors(
+            contentColor = Color.White
+        )
+    )
+    {
+        Text(
+            text = "Agenda",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Medium
+        )
+    }
 }
 }
 
