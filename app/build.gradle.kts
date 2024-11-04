@@ -60,6 +60,14 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     //implementation(libs.androidx.navigation.rutime.ktx)
+    //Mapas
+    implementation("com.google.maps.android:maps-compose:2.14.0")
+    implementation("com.google.android.gms:play-services-maps:19.0.0")
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1")
+    //Places
+    implementation("com.google.android.libraries.places:places:4.0.0")
+    //Navigation
+    implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.adaptive.android)
 
