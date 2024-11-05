@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.ita.proyectoprueba"
+    namespace = "com.example.combinedproject"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.ita.proyectoprueba"
+        applicationId = "com.example.combinedproject"
         minSdk = 26
         targetSdk = 34
         versionCode = 1
@@ -29,19 +29,24 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
     buildFeatures {
         compose = true
     }
+
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
     }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -50,7 +55,6 @@ android {
 }
 
 dependencies {
-
     // Core AndroidX
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -63,12 +67,16 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
 
-    // Mapas
+    // Biometric Authentication
+    implementation("androidx.biometric:biometric:1.1.0")
+
+    // AsyncLayoutInflater
+    implementation("androidx.asynclayoutinflater:asynclayoutinflater-appcompat:1.1.0-alpha01")
+
+    // Mapas y Places API
     implementation("com.google.maps.android:maps-compose:2.14.0")
     implementation("com.google.android.gms:play-services-maps:19.0.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1")
-
-    // Places API
     implementation("com.google.android.libraries.places:places:4.0.0")
 
     // Navigation
@@ -78,6 +86,10 @@ dependencies {
     // WorkManager para tareas en segundo plano
     implementation("androidx.work:work-runtime-ktx:2.8.1")
 
+    // Coil para carga de imágenes en Compose
+    implementation("io.coil-kt:coil-compose:2.4.0")
+    implementation(libs.androidx.appcompat)
+
     // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -86,6 +98,4 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-    implementation("io.coil-kt:coil-compose:2.4.0")
-
 }

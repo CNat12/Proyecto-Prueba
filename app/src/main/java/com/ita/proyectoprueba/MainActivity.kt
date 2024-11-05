@@ -5,18 +5,15 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.background
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
+import androidx.navigation.activity
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -27,7 +24,7 @@ import com.ita.proyectoprueba.ui.screens.*
 import com.ita.proyectoprueba.ui.theme.ProyectoPruebaTheme
 import java.util.concurrent.TimeUnit
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,11 +36,10 @@ class MainActivity : ComponentActivity() {
             }
         }
 
-
         enableEdgeToEdge()
         setContent {
             ProyectoPruebaTheme {
-                ComposeMultiScreenApp()
+                ComposeMultiScreenApp(this)
             }
         }
     }
@@ -370,7 +366,7 @@ fun clickAction() {
 }*/
 
 @Composable
-fun ComposeMultiScreenApp() {
+fun ComposeMultiScreenApp(mainActivity: MainActivity) {
     val navController = rememberNavController()
     Surface(color = Color.White) {
         SetupNavGraph(navController = navController)
@@ -392,6 +388,8 @@ fun SetupNavGraph(navController: NavHostController) {
             }
         }
         composable("agenda") { AgendaScreen(navController) }
+        //composable("Biometrics") { BiometricsScreen(activity)
+        }
     }
-}
+
 
