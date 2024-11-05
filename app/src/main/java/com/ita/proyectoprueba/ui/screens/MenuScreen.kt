@@ -97,7 +97,7 @@ fun MenuScreen(navController: NavController) {
 
         // Botón de Navegación: AgendaScreen
         Button(
-            onClick = { navController.navigate("agenda") },
+            onClick = { navController.navigate("login") },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(8.dp)
@@ -108,12 +108,12 @@ fun MenuScreen(navController: NavController) {
             )
         ) {
             Text(
-                text = "AgendaScreen",
+                text = "Log in",
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Medium
             )
         }
-        // Botón de Navegación: AgendaScreen
+        // Botón de Navegación: Alarma
         Button(
             onClick = { navController.navigate("alarm") },
             modifier = Modifier
@@ -131,5 +131,23 @@ fun MenuScreen(navController: NavController) {
                 fontWeight = FontWeight.Medium
             )
     }
+        // Botón de Navegación: AgendaScreen
+        Button(
+            onClick = { navController.navigate("agenda") },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+                .height(50.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color.Gray,
+                contentColor = Color.White
+            )
+        ) {
+            Text(
+                text = "AgendaScreen",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Medium
+            )
+        }
     }
 }

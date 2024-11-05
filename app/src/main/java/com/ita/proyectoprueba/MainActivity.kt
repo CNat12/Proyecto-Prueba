@@ -377,7 +377,6 @@ fun ComposeMultiScreenApp() {
     }
 }
 
-// Configuración de la navegación entre pantallas
 @Composable
 fun SetupNavGraph(navController: NavHostController) {
     NavHost(navController, startDestination = "menu") {
@@ -385,10 +384,14 @@ fun SetupNavGraph(navController: NavHostController) {
         composable("home") { HomeScreen(navController) }
         composable("prueba") { PruebaInter(navController) }
         composable("components") { ComponentsScreen(navController) }
+        composable("login") { LoginScreen(navController) }
+
         composable("alarm") {
             AlarmScreen { delay ->
-                (navController.context as MainActivity).scheduleAlarm(delay)
+                (navController.context as? MainActivity)?.scheduleAlarm(delay)
             }
         }
+        composable("agenda") { AgendaScreen(navController) }
     }
 }
+
