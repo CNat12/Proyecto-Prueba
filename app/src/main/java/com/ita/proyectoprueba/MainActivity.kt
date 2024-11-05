@@ -392,6 +392,8 @@ fun SetupNavGraph(navController: NavHostController) {
             }
         }
         composable("agenda") { AgendaScreen(navController) }
+        composable("Location"){ LocationScreen(navController) }
+
     }
 }
 

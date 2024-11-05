@@ -1,6 +1,7 @@
 package com.ita.proyectoprueba.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -10,9 +11,8 @@ import com.ita.proyectoprueba.viewModel.SearchViewModel
 import com.ita.proyectoprueba.views.HomeView
 import com.ita.proyectoprueba.views.MapsSearchView
 
-
 @Composable
-fun NavManager(searchVM: SearchViewModel) {
+fun NavManager(searchVM: SearchViewModel){
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "Home") {
         //Rutas
@@ -29,7 +29,7 @@ fun NavManager(searchVM: SearchViewModel) {
             val lat = it.arguments?.getFloat("lat") ?: 0.0
             val long = it.arguments?.getFloat("long") ?: 0.0
             val address = it.arguments?.getString("address") ?: ""
-            MapsSearchView(lat.toDouble(), long.toDouble(), address )
+            MapsSearchView(lat.toDouble(), long.toDouble(), address)
         }
     }
 }

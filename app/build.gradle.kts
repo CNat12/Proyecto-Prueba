@@ -74,6 +74,10 @@ dependencies {
     // Navigation
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.adaptive.android)
+    // Google Maps Compose
+    implementation ("com.google.maps.android:maps-compose:2.13.1")
+    // Google Maps Services
+    implementation ("com.google.android.gms:play-services-maps:18.1.0")
 
     // WorkManager para tareas en segundo plano
     implementation("androidx.work:work-runtime-ktx:2.8.1")
