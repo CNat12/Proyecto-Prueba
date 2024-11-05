@@ -51,26 +51,34 @@ android {
 
 dependencies {
 
+    // Core AndroidX
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
+
+    // Jetpack Compose
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    //implementation(libs.androidx.navigation.rutime.ktx)
-    //Mapas
+
+    // Mapas
     implementation("com.google.maps.android:maps-compose:2.14.0")
     implementation("com.google.android.gms:play-services-maps:19.0.0")
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1")
-    //Places
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1")
+
+    // Places API
     implementation("com.google.android.libraries.places:places:4.0.0")
-    //Navigation
-    implementation(libs.androidx.navigation.compose)
+
+    // Navigation
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.adaptive.android)
 
+    // WorkManager para tareas en segundo plano
+    implementation("androidx.work:work-runtime-ktx:2.8.1")
+
+    // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
