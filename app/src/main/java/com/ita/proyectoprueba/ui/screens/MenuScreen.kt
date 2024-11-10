@@ -32,7 +32,7 @@ fun MenuScreen(navController: NavController) {
             modifier = Modifier.padding(bottom = 24.dp)
         )
 
-        // Botón de Navegación: PruebaInterfaz
+        // Botón PruebaInterfaz
         Button(
             onClick = { navController.navigate("prueba") },
             modifier = Modifier
@@ -50,10 +50,7 @@ fun MenuScreen(navController: NavController) {
                 fontWeight = FontWeight.Medium
             )
         }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        // Botón de Navegación: Home
+        // Botón Home
         Button(
             onClick = { navController.navigate("home") },
             modifier = Modifier
@@ -71,10 +68,7 @@ fun MenuScreen(navController: NavController) {
                 fontWeight = FontWeight.Medium
             )
         }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        // Botón de Navegación: ComponentsScreen
+        // Botón ComponentsScreen
         Button(
             onClick = { navController.navigate("components") },
             modifier = Modifier
@@ -92,10 +86,7 @@ fun MenuScreen(navController: NavController) {
                 fontWeight = FontWeight.Medium
             )
         }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        // Botón de Navegación: AgendaScreen
+        // Botón Log in
         Button(
             onClick = { navController.navigate("login") },
             modifier = Modifier
@@ -113,7 +104,7 @@ fun MenuScreen(navController: NavController) {
                 fontWeight = FontWeight.Medium
             )
         }
-        // Botón de Navegación: Alarma
+        // Botón Programación de tareas en 2do plano
         Button(
             onClick = { navController.navigate("alarm") },
             modifier = Modifier
@@ -126,30 +117,12 @@ fun MenuScreen(navController: NavController) {
             )
         ) {
             Text(
-                text = "AlarmaScreen",
+                text = "Tareas en 2do plano",
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Medium
             )
     }
-        // Botón de Navegación: AgendaScreen
-        Button(
-            onClick = { navController.navigate("agenda") },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
-                .height(50.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color.Gray,
-                contentColor = Color.White
-            )
-        ) {
-            Text(
-                text = "AgendaScreen",
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Medium
-            )
-        }
-        // Botón de Navegación: AgendaScreen
+        // Botón Servicios de rastreo y geolocalización
         Button(
             onClick = { navController.navigate("Location") },
             modifier = Modifier
@@ -162,13 +135,31 @@ fun MenuScreen(navController: NavController) {
             )
         ) {
             Text(
-                text = "Location",
+                text = "Rastreo y geolocalización",
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Medium
             )
 
         }
-        // Botón de Navegación: AgendaScreen
+        // Botón Acceso a contactos y calendario
+        Button(
+            onClick = { navController.navigate("agenda") },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+                .height(50.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color.Gray,
+                contentColor = Color.White
+            )
+        ) {
+            Text(
+                text = "Contactos y calendario ",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Medium
+            )
+        }
+        // Botón Acceso a sensores biométricos
         Button(
             onClick = { navController.navigate("wifiDatos") },
             modifier = Modifier
@@ -181,11 +172,11 @@ fun MenuScreen(navController: NavController) {
             )
         ) {
             Text(
-                text = "wifiDatos",
+                text = "Acceso a sensores biométricos",
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Medium
             )}
-        // Botón de Navegación: AgendaScreen
+        // Botón Acceso a cámara y manejo de archivos del dispositivo
         Button(
             onClick = { navController.navigate("Camera") },
             modifier = Modifier
@@ -198,9 +189,28 @@ fun MenuScreen(navController: NavController) {
             )
         ) {
             Text(
-                text = "Camera",
+                text = "Cámara y manejo de archivos",
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Medium
             )}
+
+        // Botón Conectividad Wifi y datos celulares
+        Button(
+            onClick = { navController.navigate("wifiDatos") },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+                .height(50.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color.Gray,
+                contentColor = Color.White
+            )
+        ) {
+            Text(
+                text = "Conectividad Wifi y datos celulares ",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Medium
+            )}
+
     }
 }
