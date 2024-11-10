@@ -1,7 +1,10 @@
 package com.ita.proyectoprueba
 
 import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
+import android.net.ConnectivityManager
+import android.net.wifi.WifiManager
 import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
@@ -15,6 +18,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -392,8 +396,25 @@ fun SetupNavGraph(navController: NavHostController) {
             }
         }
         composable("agenda") { AgendaScreen(navController) }
-        composable("Location"){ LocationScreen(navController) }
+        composable("Location") { LocationScreen(navController) }
+        composable("wifiDatos") {
+            val context = LocalContext.current as? ComponentActivity
+            if (context != null) {
+                val wifiManager = context.getSystemService(Context.WIFI_SERVICE) as? WifiManager
+                val connectivityManager =
+                    context.getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager
 
+                if (wifiManager != null && connectivityManager != null) {
+                    WifiDatosScreen(
+                        wifiManager = wifiManager,
+                        connectivityManager = connectivityManager,
+                        context = context,
+
+                        )
+                }
+
+            }
+        }
     }
 }
 
