@@ -81,7 +81,9 @@ dependencies {
 
     // WorkManager para tareas en segundo plano
     implementation("androidx.work:work-runtime-ktx:2.8.1")
-
+    //photo
+    implementation("io.coil-kt:coil-compose:2.0.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
     // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

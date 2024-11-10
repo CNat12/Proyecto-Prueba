@@ -397,6 +397,7 @@ fun SetupNavGraph(navController: NavHostController) {
         }
         composable("agenda") { AgendaScreen(navController) }
         composable("Location") { LocationScreen(navController) }
+        composable("Camera") { CameraScreen(navController) }
         composable("wifiDatos") {
             val context = LocalContext.current as? ComponentActivity
             if (context != null) {
