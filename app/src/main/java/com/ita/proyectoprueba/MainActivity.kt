@@ -1,21 +1,22 @@
 package com.ita.proyectoprueba
 
+import WifiDatosScreen
 import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
+import android.net.ConnectivityManager
+import android.net.wifi.WifiManager
 import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -23,8 +24,10 @@ import androidx.navigation.compose.rememberNavController
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.example.project1.ui.screens.ComponentsScreen
+import com.example.projecto1.ui.screens.BiometricsScreen
 import com.ita.proyectoprueba.ui.screens.*
 import com.ita.proyectoprueba.ui.theme.ProyectoPruebaTheme
+import org.w3c.dom.Text
 import java.util.concurrent.TimeUnit
 
 class MainActivity : ComponentActivity() {
@@ -392,6 +395,33 @@ fun SetupNavGraph(navController: NavHostController) {
             }
         }
         composable("agenda") { AgendaScreen(navController) }
+        composable("biometrics") {
+            val context = LocalContext.current
+            if (context is AppCompatActivity) {
+                BiometricsScreen(context)
+            }
+        }
+            composable("wifiDatos") {
+                val context = LocalContext.current as? ComponentActivity
+                if (context != null) {
+                    val wifiManager = context.getSystemService(Context.WIFI_SERVICE) as? WifiManager
+                    val connectivityManager =
+                        context.getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager
+
+                    if (wifiManager != null && connectivityManager != null) {
+                        WifiDatosScreen(
+                            wifiManager = wifiManager,
+                            connectivityManager = connectivityManager,
+                            context = context,
+
+                            )
+                    }
+                }
+            }
+        }
     }
-}
+
+
+
+
 

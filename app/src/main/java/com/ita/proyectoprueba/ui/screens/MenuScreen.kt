@@ -149,5 +149,40 @@ fun MenuScreen(navController: NavController) {
                 fontWeight = FontWeight.Medium
             )
         }
+        // Botón de Navegación: AgendaScreen
+        Button(
+            onClick = { navController.navigate("biometrics") },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+                .height(50.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color.Gray,
+                contentColor = Color.White
+            )
+        ) {
+            Text(
+                text = "biometrics",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Medium
+            )
+        }
+        Button(
+            onClick = { navController.navigate("wifiDatos") },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+                .height(50.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color.Gray,
+                contentColor = Color.White
+            )
+        ) {
+            Text(
+                text = "wifiDatos",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Medium
+            )
+        }
     }
 }

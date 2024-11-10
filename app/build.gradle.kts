@@ -78,7 +78,12 @@ dependencies {
     // WorkManager para tareas en segundo plano
     implementation("androidx.work:work-runtime-ktx:2.8.1")
 
+    // Biometría
+    implementation("androidx.biometric:biometric:1.1.0")
+    implementation("androidx.asynclayoutinflater:asynclayoutinflater-appcompat:1.1.0-alpha01")
+    implementation ("androidx.appcompat:appcompat:1.6.1")
     // Testing
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -87,5 +92,6 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation("io.coil-kt:coil-compose:2.4.0")
+
 
 }
