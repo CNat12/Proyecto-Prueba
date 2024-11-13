@@ -59,7 +59,7 @@ fun LoginForm(navController: NavController) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             AsyncImage(
-                model = "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
+                model = "https://imgs.search.brave.com/mlmwx8JpWNLKlEGKBS0Mu5Cx67KOt4Zy1EIkZAkuVS8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wbmdp/bWcuY29tL3VwbG9h/ZHMvZ2l0aHViL2dp/dGh1Yl9QTkczLnBu/Zw",
                 contentDescription = "Github Logo",
                 contentScale = ContentScale.Fit
             )
