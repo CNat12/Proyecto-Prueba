@@ -63,13 +63,9 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
 
-    // Mapas
-    implementation("com.google.maps.android:maps-compose:2.14.0")
-    implementation("com.google.android.gms:play-services-maps:19.0.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1")
 
-    // Places API
-    implementation("com.google.android.libraries.places:places:4.0.0")
+    // WorkManager para tareas en segundo plano
+    implementation("androidx.work:work-runtime-ktx:2.8.1")
 
     // Navigation
     implementation(libs.androidx.navigation.compose)
@@ -79,11 +75,18 @@ dependencies {
     // Google Maps Services
     implementation ("com.google.android.gms:play-services-maps:18.1.0")
 
-    // WorkManager para tareas en segundo plano
-    implementation("androidx.work:work-runtime-ktx:2.8.1")
+    // Mapas
+    implementation("com.google.maps.android:maps-compose:2.14.0")
+    implementation("com.google.android.gms:play-services-maps:19.0.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1")
+
+    // Places API
+    implementation("com.google.android.libraries.places:places:4.0.0")
+
     //photo
     implementation("io.coil-kt:coil-compose:2.0.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
+    
     // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

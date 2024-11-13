@@ -385,18 +385,19 @@ fun ComposeMultiScreenApp() {
 fun SetupNavGraph(navController: NavHostController) {
     NavHost(navController, startDestination = "menu") {
         composable("menu") { MenuScreen(navController) }
-        composable("home") { HomeScreen(navController) }
         composable("prueba") { PruebaInter(navController) }
+        composable("home") { HomeScreen(navController) }
         composable("components") { ComponentsScreen(navController) }
         composable("login") { LoginScreen(navController) }
-
+        //segundo plano
         composable("alarm") {
             AlarmScreen { delay ->
                 (navController.context as? MainActivity)?.scheduleAlarm(delay)
             }
         }
-        composable("agenda") { AgendaScreen(navController) }
         composable("Location") { LocationScreen(navController) }
+        composable("agenda") { AgendaScreen(navController) }
+       //Biometrics
         composable("Camera") { CameraScreen(navController) }
         composable("wifiDatos") {
             val context = LocalContext.current as? ComponentActivity
