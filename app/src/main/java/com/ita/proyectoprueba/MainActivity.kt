@@ -11,15 +11,11 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -31,7 +27,8 @@ import com.ita.proyectoprueba.ui.screens.*
 import com.ita.proyectoprueba.ui.theme.ProyectoPruebaTheme
 import java.util.concurrent.TimeUnit
 
-class MainActivity : ComponentActivity() {
+
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +44,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ProyectoPruebaTheme {
-                ComposeMultiScreenApp()
+                ComposeMultiScreenApp(this)
             }
         }
     }
@@ -336,7 +333,7 @@ Row(
         .fillMaxWidth()
         .padding(0.dp, 150.dp))*/
 
-    // Método para programar una alarma en segundo plano usando WorkManager
+    // Metodo de programar alarma
     fun scheduleAlarm(delayInMillis: Long) {
         val workRequest = OneTimeWorkRequestBuilder<AlarmWorker>()
             .setInitialDelay(delayInMillis, TimeUnit.MILLISECONDS)
@@ -373,16 +370,19 @@ fun clickAction() {
     println("Column Clicked")
 }*/
 
+//@Preview(showBackground = true)
 @Composable
-fun ComposeMultiScreenApp() {
+fun ComposeMultiScreenApp(activity: AppCompatActivity){
     val navController = rememberNavController()
-    Surface(color = Color.White) {
-        SetupNavGraph(navController = navController)
+    Surface (color = Color.White) {
+        SetupNavGraph(navController = navController, activity)
     }
 }
 
+
+
 @Composable
-fun SetupNavGraph(navController: NavHostController) {
+fun SetupNavGraph(navController: NavHostController, activity: AppCompatActivity) {
     NavHost(navController, startDestination = "menu") {
         composable("menu") { MenuScreen(navController) }
         composable("prueba") { PruebaInter(navController) }
@@ -397,7 +397,7 @@ fun SetupNavGraph(navController: NavHostController) {
         }
         composable("Location") { LocationScreen(navController) }
         composable("agenda") { AgendaScreen(navController) }
-       //Biometrics
+        composable("Biometrics") { BiometricsScreen(activity)}
         composable("Camera") { CameraScreen(navController) }
         composable("wifiDatos") {
             val context = LocalContext.current as? ComponentActivity
