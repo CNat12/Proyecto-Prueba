@@ -1,4 +1,4 @@
-package com.ita.proyectoprueba.data.model
+package com.ita.proyectoprueba.model
 
 import androidx.compose.ui.graphics.painter.Painter
 
