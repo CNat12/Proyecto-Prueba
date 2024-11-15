@@ -1,6 +1,5 @@
-package com.ita.proyectoprueba.data.model
+package com.ita.proyectoprueba.model
 
-import android.icu.text.CaseMap.Title
 import androidx.compose.ui.graphics.vector.ImageVector
 
 data class MenuModel(
