@@ -1,4 +1,4 @@
-package com.example.project1.ui.screens
+package com.ita.proyectoprueba.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -96,11 +96,12 @@ import androidx.navigation.NavController
 import androidx.window.core.layout.WindowHeightSizeClass
 import androidx.window.core.layout.WindowWidthSizeClass
 import com.ita.proyectoprueba.R
-import com.ita.proyectoprueba.model.MenuModel
-import com.ita.proyectoprueba.model.PostModel
+import com.ita.proyectoprueba.data.model.MenuModel
+import com.ita.proyectoprueba.data.model.PostModel
 import com.ita.proyectoprueba.ui.components.PostCard
 import com.ita.proyectoprueba.ui.components.PostCardCompact
 import kotlinx.coroutines.launch
+
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -1024,42 +1025,42 @@ fun Posts(arrayPosts: Array<PostModel>, adaptive: String) {
     }
 }
 
-    @Preview(showBackground = true, device = "spec:id=reference_tablet,shape=Normal,width=1280,height=800,unit=dp,dpi=240")
-    @Composable
-    fun Adaptive() {
+@Preview(showBackground = true, device = "spec:id=reference_tablet,shape=Normal,width=1280,height=800,unit=dp,dpi=240")
+@Composable
+fun Adaptive() {
 
-        var WindowsSize = currentWindowAdaptiveInfo().windowSizeClass
-        var height = currentWindowAdaptiveInfo().windowSizeClass.windowHeightSizeClass
-        var width = currentWindowAdaptiveInfo().windowSizeClass.windowWidthSizeClass
-        //Compact width < 600dp Phone portrait
-        //Medium width >= 600dp < 840dp Tablets portrait
-        //Expanded width >840dp Tablets landscape
-        //Text(text = WindowsSize.toString())
+    var WindowsSize = currentWindowAdaptiveInfo().windowSizeClass
+    var height = currentWindowAdaptiveInfo().windowSizeClass.windowHeightSizeClass
+    var width = currentWindowAdaptiveInfo().windowSizeClass.windowWidthSizeClass
+    //Compact width < 600dp Phone portrait
+    //Medium width >= 600dp < 840dp Tablets portrait
+    //Expanded width >840dp Tablets landscape
+    //Text(text = WindowsSize.toString())
 
-        //Compact height < 480dp Phone landscape telefono ajustado
-        //Medium height <= 480dp < 900dp Tablet landscape or phone portrait
-        val post = arrayOf(
-            PostModel(1, "Title 1", "Text 1", painterResource(R.drawable.android)),
-            PostModel(2, "Title 2", "Text 2", painterResource(R.drawable.android)),
-            PostModel(3, "Title 3", "Text 3", painterResource(R.drawable.android)),
-            PostModel(4, "Title 4", "Text 4", painterResource(R.drawable.android)),
-            PostModel(5, "Title 5", "Text 5", painterResource(R.drawable.android)),
-            PostModel(6, "Title 6", "Text 6", painterResource(R.drawable.android)),
-            PostModel(7, "Title 7", "Text 7", painterResource(R.drawable.android)),
-            PostModel(8, "Title 8", "Text 8", painterResource(R.drawable.android)),
-            PostModel(9, "Title 9", "Text 9", painterResource(R.drawable.android)),
-            PostModel(10, "Title 10", "Text 10", painterResource(R.drawable.android)),
+    //Compact height < 480dp Phone landscape telefono ajustado
+    //Medium height <= 480dp < 900dp Tablet landscape or phone portrait
+    val post = arrayOf(
+        PostModel(1, "Title 1", "Text 1", painterResource(R.drawable.android)),
+        PostModel(2, "Title 2", "Text 2", painterResource(R.drawable.android)),
+        PostModel(3, "Title 3", "Text 3", painterResource(R.drawable.android)),
+        PostModel(4, "Title 4", "Text 4", painterResource(R.drawable.android)),
+        PostModel(5, "Title 5", "Text 5", painterResource(R.drawable.android)),
+        PostModel(6, "Title 6", "Text 6", painterResource(R.drawable.android)),
+        PostModel(7, "Title 7", "Text 7", painterResource(R.drawable.android)),
+        PostModel(8, "Title 8", "Text 8", painterResource(R.drawable.android)),
+        PostModel(9, "Title 9", "Text 9", painterResource(R.drawable.android)),
+        PostModel(10, "Title 10", "Text 10", painterResource(R.drawable.android)),
 
-            )
-        if (width == WindowWidthSizeClass.COMPACT) {
-            Posts(post, "PhoneP")
-        } else if (height == WindowHeightSizeClass.COMPACT) {
-            Posts(post, "PhoneL")
-        } else {
-            Posts(post, "PhoneL")
+        )
+    if (width == WindowWidthSizeClass.COMPACT) {
+        Posts(post, "PhoneP")
+    } else if (height == WindowHeightSizeClass.COMPACT) {
+        Posts(post, "PhoneL")
+    } else {
+        Posts(post, "PhoneL")
 
-        }
     }
+}
 
 
 
