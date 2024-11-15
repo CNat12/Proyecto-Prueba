@@ -86,12 +86,7 @@ dependencies {
     //photo
     implementation("io.coil-kt:coil-compose:2.0.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
-
-    //Biometrics
-    implementation("androidx.biometric:biometric:1.1.0")
-    implementation("androidx.asynclayoutinflater:asynclayoutinflater-appcompat:1.1.0-alpha01")
-    implementation(libs.androidx.appcompat)
-
+    
     // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

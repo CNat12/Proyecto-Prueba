@@ -161,7 +161,7 @@ fun MenuScreen(navController: NavController) {
         }
         // Botón Acceso a sensores biométricos
         Button(
-            onClick = { navController.navigate("biometrics") },
+            onClick = { navController.navigate("wifiDatos") },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(8.dp)
