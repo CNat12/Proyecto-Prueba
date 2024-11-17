@@ -1024,7 +1024,7 @@ fun Posts(arrayPosts: Array<PostModel>, adaptive: String) {
     }
 }
 
-    @Preview(showBackground = true, device = "spec:id=reference_tablet,shape=Normal,width=1280,height=800,unit=dp,dpi=240")
+    @Preview(showBackground = true, device = "spec:width=1280dp,height=800dp,dpi=240")
     @Composable
     fun Adaptive() {
 
