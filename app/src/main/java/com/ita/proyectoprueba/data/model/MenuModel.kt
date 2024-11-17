@@ -1,4 +1,4 @@
-package com.ita.proyectoprueba.model
+package com.ita.proyectoprueba.data.model
 
 import androidx.compose.ui.graphics.vector.ImageVector
 

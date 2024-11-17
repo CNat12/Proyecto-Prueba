@@ -1,4 +1,4 @@
-package com.ita.proyectoprueba.model
+package com.ita.proyectoprueba.data.model
 
 data class ServiceModel(
     var id: Int = 0,

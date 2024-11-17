@@ -1,4 +1,4 @@
-package com.ita.proyectoprueba.navigation
+package com.ita.proyectoprueba.data.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
