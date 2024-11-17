@@ -96,8 +96,8 @@ import androidx.navigation.NavController
 import androidx.window.core.layout.WindowHeightSizeClass
 import androidx.window.core.layout.WindowWidthSizeClass
 import com.ita.proyectoprueba.R
-import com.ita.proyectoprueba.model.MenuModel
-import com.ita.proyectoprueba.model.PostModel
+import com.ita.proyectoprueba.data.model.MenuModel
+import com.ita.proyectoprueba.data.model.PostModel
 import com.ita.proyectoprueba.ui.components.PostCard
 import com.ita.proyectoprueba.ui.components.PostCardCompact
 import kotlinx.coroutines.launch

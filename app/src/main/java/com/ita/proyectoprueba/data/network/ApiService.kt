@@ -1,6 +1,6 @@
-package com.ita.proyectoprueba.data.model.network
+package com.ita.proyectoprueba.data.network
 
-import com.ita.proyectoprueba.model.ServiceModel
+import com.ita.proyectoprueba.data.model.ServiceModel
 import retrofit2.http.GET
 import retrofit2.Response
 import retrofit2.http.*
