@@ -96,8 +96,8 @@ import androidx.navigation.NavController
 import androidx.window.core.layout.WindowHeightSizeClass
 import androidx.window.core.layout.WindowWidthSizeClass
 import com.ita.proyectoprueba.R
-import com.ita.proyectoprueba.model.MenuModel
-import com.ita.proyectoprueba.model.PostModel
+import com.ita.proyectoprueba.data.model.MenuModel
+import com.ita.proyectoprueba.data.model.PostModel
 import com.ita.proyectoprueba.ui.components.PostCard
 import com.ita.proyectoprueba.ui.components.PostCardCompact
 import kotlinx.coroutines.launch
@@ -1024,7 +1024,7 @@ fun Posts(arrayPosts: Array<PostModel>, adaptive: String) {
     }
 }
 
-    @Preview(showBackground = true, device = "spec:id=reference_tablet,shape=Normal,width=1280,height=800,unit=dp,dpi=240")
+    @Preview(showBackground = true, device = "spec:width=1280dp,height=800dp,dpi=240")
     @Composable
     fun Adaptive() {
 

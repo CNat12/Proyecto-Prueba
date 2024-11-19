@@ -1,4 +1,4 @@
-package com.ita.proyectoprueba.data.model.network
+package com.ita.proyectoprueba.data.network
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
