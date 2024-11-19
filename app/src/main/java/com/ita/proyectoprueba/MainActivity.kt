@@ -23,6 +23,8 @@ import androidx.navigation.compose.rememberNavController
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.example.project1.ui.screens.ComponentsScreen
+import com.ita.proyectoprueba.ui.components.ServiceCard
+
 import com.ita.proyectoprueba.ui.screens.*
 import com.ita.proyectoprueba.ui.theme.ProyectoPruebaTheme
 import java.util.concurrent.TimeUnit
@@ -385,6 +387,7 @@ fun ComposeMultiScreenApp(activity: AppCompatActivity){
 fun SetupNavGraph(navController: NavHostController, activity: AppCompatActivity) {
     NavHost(navController, startDestination = "menu") {
         composable("menu") { MenuScreen(navController) }
+        composable("ServiceCard") {ServiceCard(navController) }
         composable("prueba") { PruebaInter(navController) }
         composable("home") { HomeScreen(navController) }
         composable("components") { ComponentsScreen(navController) }
@@ -412,8 +415,8 @@ fun SetupNavGraph(navController: NavHostController, activity: AppCompatActivity)
                         connectivityManager = connectivityManager,
                         context = context,
 
-                        )
-                }
+                        ) }
+
 
             }
         }
