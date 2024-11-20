@@ -14,7 +14,8 @@ import androidx.navigation.NavHostController
 import com.ita.proyectoprueba.R
 
 @Composable
-fun ServiceCard(navController: NavHostController) {
+fun ServiceCard(id: Int, name:String,username:String,imageURL:String?, onButtonClick:()->Unit) {
+
     Column(
         modifier = Modifier
             .fillMaxSize()
