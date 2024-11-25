@@ -211,6 +211,22 @@ fun MenuScreen(navController: NavController) {
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Medium
             )}
+        Button(
+            onClick = { navController.navigate("ServiceCard") },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+                .height(50.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color.Gray,
+                contentColor = Color.White
+            )
+        ) {
+            Text(
+                text = "ServiceCard",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Medium
+            )}
 
     }
 }
