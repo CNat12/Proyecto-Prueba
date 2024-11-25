@@ -1,6 +1,4 @@
 package com.ita.proyectoprueba.ui.components
-
-import androidx.compose.foundation.content.MediaType.Companion.Text
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -38,7 +36,7 @@ fun ServiceDetailCard(
     name: String,
     username: String,
     password:String,
-    decription:String,
+    description:String,
     imageURL:String?,
     onEditClick: () -> Unit
 ){
@@ -63,7 +61,7 @@ fun ServiceDetailCard(
             )
             Text(
                 text = name,
-                color = colorResource(id = R.color.purple_200),
+                color = colorResource(id = R.color.purple_500),
                 fontSize = 28.sp,
                 fontWeight = FontWeight.Bold
             )
@@ -125,9 +123,9 @@ fun ServiceDetailCard(
                 fontWeight = FontWeight.Medium
             )
             Text(
-                text = "***********",
+                text = "**********",
                 fontSize = 18.sp,
-                color = Color.Gray,
+                color = Color.LightGray,
                 fontWeight = FontWeight.Medium
             )
             IconButton(
@@ -138,25 +136,27 @@ fun ServiceDetailCard(
                     contentDescription = "Copy password"
                 )
             }
-            HorizontalDivider()
-            Row(
-                modifier = Modifier
-                    .padding(10.dp)
-                    .fillMaxWidth(),
-                Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ){
-                Text(
-                    text = "Description:",
-                    fontSize = 10.sp,
-                    fontWeight = FontWeight.Medium
-                )
-                Text(
-                    text = decription,
-                    fontSize = 18.sp,
-                    color = Color.LightGray
-                )
-            }
+        }
+
+        HorizontalDivider()
+        Row(
+            modifier = Modifier
+                .padding(10.dp)
+                .fillMaxWidth(),
+            Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ){
+            Text(
+                text = "Description: ",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Medium
+            )
+            Text(
+                text = description,
+                fontSize = 18.sp,
+                color = Color.LightGray,
+                fontWeight = FontWeight.Medium
+            )
         }
     }
 }
