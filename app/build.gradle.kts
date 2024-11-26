@@ -1,11 +1,12 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("com.google.devtools.ksp")
 }
 
 android {
     namespace = "com.ita.proyectoprueba"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.ita.proyectoprueba"
@@ -91,6 +92,12 @@ dependencies {
     implementation("androidx.biometric:biometric:1.1.0")
     implementation("androidx.asynclayoutinflater:asynclayoutinflater-appcompat:1.1.0-alpha01")
     implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.room.common)
+    implementation(libs.androidx.room.compiler)
+
+    //SQLite
+    val room_version = "2.6.1"
+    ksp("androidx.room:room-compiler:$room_version")
 
     // Testing
     testImplementation(libs.junit)
@@ -111,5 +118,4 @@ dependencies {
     implementation("io.coil-kt:coil-compose:2.4.0")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-
 }
