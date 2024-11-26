@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -23,6 +24,8 @@ import androidx.navigation.compose.rememberNavController
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.example.project1.ui.screens.ComponentsScreen
+import com.ita.proyectoprueba.ui.components.ServiceCard
+
 import com.ita.proyectoprueba.ui.screens.*
 import com.ita.proyectoprueba.ui.theme.ProyectoPruebaTheme
 import java.util.concurrent.TimeUnit
@@ -383,7 +386,7 @@ fun ComposeMultiScreenApp(activity: AppCompatActivity){
 
 @Composable
 fun SetupNavGraph(navController: NavHostController, activity: AppCompatActivity) {
-    NavHost(navController, startDestination = "menu") {
+    NavHost(navController, startDestination = "home") {
         composable("menu") { MenuScreen(navController) }
         composable("prueba") { PruebaInter(navController) }
         composable("home") { HomeScreen(navController) }
@@ -414,9 +417,13 @@ fun SetupNavGraph(navController: NavHostController, activity: AppCompatActivity)
 
                         )
                 }
-
             }
+            }
+        composable(route = "manage-service/{serviceId}") { backStackEntry ->
+            val serviceId = backStackEntry.arguments?.getString("serviceId")
+            ManageServiceScreen(navController, serviceId = serviceId)
         }
+
     }
-}
+        }
 
