@@ -7,6 +7,7 @@ import android.net.ConnectivityManager
 import android.net.wifi.WifiManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -24,6 +25,8 @@ import androidx.navigation.compose.rememberNavController
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.example.project1.ui.screens.ComponentsScreen
+import com.ita.proyectoprueba.data.database.AppDatabase
+import com.ita.proyectoprueba.data.database.DatabaseProvider
 import com.ita.proyectoprueba.ui.components.ServiceCard
 
 import com.ita.proyectoprueba.ui.screens.*
@@ -32,9 +35,17 @@ import java.util.concurrent.TimeUnit
 
 
 class MainActivity : AppCompatActivity() {
-
+//database
+    lateinit var database: AppDatabase
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //database-Createdatabase
+        try{
+            database=  DatabaseProvider.getDatabase(this)
+            Log.d("DB","Database loaded sucessfully")
+        }catch (exception:Exception){
+            Log.d("DB","error: $exception")
+        }
 
         // Verifica y solicita permiso para notificaciones en Android 13 o superior
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
